@@ -1,0 +1,102 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-infinite-scroller
+
+PATH: 
+  C:\Program Files\ImageMagick-7.0.10-Q16;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Java\jre1.8.0_201\bin;C:\Program Files\nodejs\;C:\Go\bin;C:\Program Files\Microsoft\Web Platform Installer\;C:\Program Files (x86)\Yarn\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Android;C:\Program Files\Dart\dart-sdk\bin;C:\xampp\php;C:\composer;C:\Program Files (x86)\Tesseract-OCR;C:\Users\Dell\AppData\Local\Programs\Python\Python37\Scripts\;C:\Users\Dell\AppData\Local\Programs\Python\Python37\Lib\site-packages\selenium\webdriver\chrome;C:\Users\Dell\AppData\Local\Programs\Python\Python37\;C:\Users\Dell\AppData\Local\Programs\Python\Python37\Lib\site-packages\selenium\webdriver\firefox;C:\Users\Dell\Anaconda3;C:\Users\Dell\Anaconda3\Library\mingw-w64\bin;C:\Users\Dell\Anaconda3\Library\usr\bin;C:\Users\Dell\Anaconda3\Library\bin;C:\Users\Dell\Anaconda3\Scripts;C:\Users\Dell\AppData\Local\Microsoft\WindowsApps;C:\Users\Dell\AppData\Roaming\Composer\vendor\bin;C:\Users\Dell\bin\geckodriver.exe;C:\Users\Programfiles\nodejs;C:\Program Files\JetBrains\PyCharm Community Edition 2018.3.2\bin;D:\31 jan 2019\nginx-1.14.2;C:\Program Files\R\R-3.3.2\bin\x86;C:\Users\Dell\AppData\Roaming\npm;C:\Users\Dell\AppData\Local\Programs\Python\Python37\Lib\site-packages\PyICU-2.2;C:\Users\Dell\go\bin;C:\Users\Dell\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\ucrt;C:\Windows\System32;C:\Program Files\wkhtmltopdf\bin;C:\Program Files\heroku\bin;C:\Users\Dell\AppData\Local\Yarn\bin;C:\Program Files (x86)\Java\jre1.8.0_231\bin;C:\Program Files\Git\bin\;C:\Program Files\Git\cmd\;C:\Program Files (x86)\GTK2-Runtime\bin;C:\vcpkg-master;C:\ffmpeg\bin;C:\Program Files\ImageMagick-7.0.10-Q16\magick.exe;C:\flutter\bin
+
+Yarn version: 
+  1.17.3
+
+Node version: 
+  10.15.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'E:\webpack-react-argon\digitalbox\node_modules\node-sass\vendor\win32-x64-64\binding.node'
+
+npm manifest: 
+  {
+    "name": "digitalbox",
+    "version": "1.1.0",
+    "description": "Kiran Voleti",
+    "main": "index.js",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/creativetimofficial/argon-dashboard-react.git"
+    },
+    "keywords": [
+      "react",
+      "reactjs",
+      "argon",
+      "argon-react",
+      "dashboard",
+      "dashboard-react",
+      "argon-dashboard",
+      "argon-dashboard-react"
+    ],
+    "author": "Kiran Voleti",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/creativetimofficial/argon-dashboard-react/issues"
+    },
+    "homepage": "/",
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject",
+      "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
+      "compile-sass": "node-sass src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.css",
+      "minify-sass": "node-sass src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.min.css --output-style compressed",
+      "map-sass": "node-sass src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.css --source-map true"
+    },
+    "eslintConfig": {
+      "extends": "react-app"
+    },
+    "browserslist": [
+      ">0.2%",
+      "not dead",
+      "not ie <= 11",
+      "not op_mini all"
+    ],
+    "dependencies": {
+      "@fortawesome/fontawesome-free": "^5.14.0",
+      "axios": "^0.20.0",
+      "chart.js": "2.9.3",
+      "classnames": "2.2.6",
+      "moment": "2.24.0",
+      "node-sass": "4.13.1",
+      "nouislider": "14.1.1",
+      "prop-types": "^15.7.2",
+      "react": "16.12.0",
+      "react-bootstrap-sweetalert": "^5.2.0",
+      "react-chartjs-2": "2.9.0",
+      "react-copy-to-clipboard": "5.0.2",
+      "react-datetime": "2.16.3",
+      "react-dom": "16.12.0",
+      "react-google-maps": "9.4.5",
+      "react-paginate": "^6.5.0",
+      "react-reactstrap-pagination": "^2.0.3",
+      "react-router-dom": "5.1.2",
+      "react-scripts": "3.4.1",
+      "react-toastify": "^6.0.8",
+      "reactstrap": "8.4.1"
+    },
+    "devDependencies": {
+      "@types/googlemaps": "3.39.2",
+      "@types/markerclustererplus": "2.1.33",
+      "@types/react": "16.9.19",
+      "eslint-plugin-flowtype": "3.13.0",
+      "gulp": "4.0.2",
+      "gulp-append-prepend": "1.0.8",
+      "typescript": "3.7.5"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
