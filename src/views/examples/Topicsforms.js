@@ -275,7 +275,8 @@ function Topicsforms(props) {
                                                             <option value="feeds">Feeds (text data)</option>
                                                             <option value="googlenewsfeeds">Googlenewsfeeds (text data)</option>
                                                             <option value="links">Links (text data)</option>
-                                                            <option value="channel">Channel (video data)</option>
+                                                            <option value="channel">Channel ID(video data)</option>
+                                                            <option value="username">Channel name(video data)</option>
                                                             <option value="video">Video (video data)</option>
                                                             <option value="">---------Children---------</option>
 

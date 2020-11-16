@@ -335,7 +335,7 @@ const getCookie = (name) => {
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-                <h3 className="mb-0">Subscribed Users</h3>
+                <h3 className="mb-0">Tags List</h3>
               </CardHeader>
               <Form>
                 <Row>

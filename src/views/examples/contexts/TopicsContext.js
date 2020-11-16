@@ -323,7 +323,14 @@ const deletefeeditem = (e) => {
         }
         axios.post(url, form_data, config)
             .then(res => {
-                setFeedreadylist(res.data.feeds)
+
+
+                var respfeeds = res.data.feeds.map(val => (
+                    { ...val, ischecked: false }
+                ))
+                
+
+                setFeedreadylist(respfeeds)
 
                 setPaginationcount(res.data.total)
                 // tosttrigger(res.data.msg, 'success')
@@ -933,6 +940,7 @@ const deletefeeditem = (e) => {
         setTools(resptools)
         
     }
+    
     const handleCheckchangeTools = (e) => {
         let valid = e.target.id;
         let valchecked = e.target.checked;
@@ -945,6 +953,30 @@ const deletefeeditem = (e) => {
 
         setTools(somevideosupdated);
 
+    }
+
+    const handleCheckchangeSource = (e) => {
+        let valid = e.target.id;
+        let valchecked = e.target.checked;
+        var somefeedsupdated = feedreadylist.filter((val, key) => {
+
+            return [...feedreadylist, parseInt(val.id) === parseInt(valid) ? val.ischecked = valchecked : val.ischecked]
+
+
+        });
+
+        setFeedreadylist(somefeedsupdated);
+
+    }
+    const handleAllCheckedSource = (event) => {
+        // alert(event.target.id)
+        
+        setStateallchecked(event.target.checked)
+        var respfeeds = feedreadylist.map(val => (
+            { ...val, ischecked: event.target.checked }
+        ))
+        setFeedreadylist(respfeeds)
+        
     }
 
 
@@ -1018,6 +1050,9 @@ const deletefeeditem = (e) => {
             setTools(resptools)
             
 
+        }
+        else{
+            alert('feeds');
         }
         
 
@@ -1110,7 +1145,7 @@ const deletefeeditem = (e) => {
             .then(res => {
 
                 tosttrigger(res.data.message, "success");
-                getallarticles(e)
+                // getallarticles(e)
 
             })
             .catch(err =>
@@ -1443,7 +1478,9 @@ const deletefeeditem = (e) => {
                 list.push(elm.id)
             }
         })
-
+        
+         
+        
         form_data.append('deletelist', list);
         form_data.append('tablename', 'Articles');
         let url = 'https://app.kiranvoleti.com/bulkdeltereact';
@@ -1459,7 +1496,13 @@ const deletefeeditem = (e) => {
             .then(res => {
 
                 tosttrigger(res.data.msg, "success");
-                getallarticles(e)
+                var somearticlesupdated = allarticles.filter((val,key) =>(
+                    ! list.includes(val.id.toString()))
+                    );
+                   
+                   setAllarticles(somearticlesupdated);  
+                
+                
 
             })
             .catch(err =>
@@ -1495,7 +1538,11 @@ const deletefeeditem = (e) => {
         axios.post(url, form_data, config)
             .then(res => {
 
-                getallvideos(e)
+                var somevideosupdated = allvideos.filter((val,key) =>(
+                    ! list.includes(val.id.toString()))
+                    );
+                   
+                   setAllvideos(somevideosupdated);  
                 tosttrigger(res.data.msg, "success");
 
             })
@@ -1537,7 +1584,11 @@ const deletefeeditem = (e) => {
         axios.post(url, form_data, config)
             .then(res => {
 
-                getalltools(e)
+                var sometoolsupdated = tools.filter((val,key) =>(
+                    ! list.includes(val.id.toString()))
+                    );
+                   
+                   setTools(sometoolsupdated);  
                 tosttrigger(res.data.msg, "success");
 
             })
@@ -1631,8 +1682,8 @@ const deletefeeditem = (e) => {
             toolmodel, setToolmodel ,toggletoolmodel,toolhandlesubmit, handlePageClicktools,
 
             handleAllCheckedArticles,handleCheckchangeArticles,stateallchecked,setStateallchecked,
-            handleAllCheckedVideos,handleCheckchangeVideos,handleAllCheckedTools,
-            handleCheckchangeTools,setDynotoollink,setDynotooltext,dynolinktextupdater,toolstatuschange
+            handleAllCheckedVideos,handleCheckchangeVideos,handleAllCheckedTools,handleAllCheckedSource,
+            handleCheckchangeTools,handleCheckchangeSource,setDynotoollink,setDynotooltext,dynolinktextupdater,toolstatuschange
             
 
         }}>

@@ -34,7 +34,8 @@ function Articletable(props) {
                                     className="custom-control-input"
                                     id="parentbox"
                                     type="checkbox"
-                                    onChange={topicmanager.handleAllChecked}
+                                    checked={topicmanager.stateallchecked}
+                                    onChange={topicmanager.handleAllCheckedSource}
                                 />
                                 <label className="custom-control-label" htmlFor="parentbox">
                                     #
@@ -70,7 +71,8 @@ function Articletable(props) {
                                         type="checkbox"
                                         name="childbox"
                                         data-url={row.feedlist}
-                                        onChange={topicmanager.handlechange}
+                                        onChange={topicmanager.handleCheckchangeSource}
+                                        checked={row.ischecked}
                                     />
 
                                     <label className="custom-control-label" htmlFor={row.id}>
