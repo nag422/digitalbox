@@ -156,7 +156,7 @@ const deletefeeditem = (e) => {
     form_data.append('deletelist', e.target.dataset.id);
     form_data.append('tablename', 'feedentryboard');
 
-    let url = "https://app.kiranvoleti.com/bulkdeltereact";
+    let url = "https://app.kiranvoleti.com/ui/admin/bulkdeltereact/";
     
     const config = {
         headers: {
@@ -218,7 +218,7 @@ const deletefeeditem = (e) => {
         // Before Ui Elements
         // Backend Submission
 
-        let url = "https://app.kiranvoleti.com/feedsummary";
+        let url = "https://app.kiranvoleti.com/ui/admin/feedsummary/";
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -255,7 +255,7 @@ const deletefeeditem = (e) => {
 
         let form_data = new FormData();
 
-        form_data.append('perpage', feedform.perpage);
+        form_data.append('perpage', articlevideoperpage);
         form_data.append('page', e);
         form_data.append('typeofsubmit', feedform.typeofsubmit);
 
@@ -268,7 +268,7 @@ const deletefeeditem = (e) => {
         // Before Ui Elements
         // Backend Submission
 
-        let url = "https://app.kiranvoleti.com/getfeedlist";
+        let url = "https://app.kiranvoleti.com/ui/admin/getfeedlist/";
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -300,7 +300,7 @@ const deletefeeditem = (e) => {
 
         let form_data = new FormData();
 
-        form_data.append('perpage', feedform.perpage);
+        form_data.append('perpage', articlevideoperpage);
         form_data.append('page', parseInt(feedform.page));
         form_data.append('typeofsubmit', feedform.typeofsubmit);
 
@@ -313,7 +313,7 @@ const deletefeeditem = (e) => {
         // Before Ui Elements
         // Backend Submission
 
-        let url = "https://app.kiranvoleti.com/getfeedlist";
+        let url = "https://app.kiranvoleti.com/ui/admin/getfeedlist/";
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -413,7 +413,7 @@ const deletefeeditem = (e) => {
         // Before Ui Elements
         // Backend Submission
 
-        let url = "https://app.kiranvoleti.com/fetchvideochannels";
+        let url = "https://app.kiranvoleti.com/ui/admin/fetchvideochannels/";
         // let url = 'http://localhost:8099/fetchfeeds';
         const config = {
             headers: {
@@ -481,7 +481,7 @@ const deletefeeditem = (e) => {
         // Before Ui Elements
         // Backend Submission
 
-        let url = "https://app.kiranvoleti.com/fetchfeeds";
+        let url = "https://app.kiranvoleti.com/ui/admin/fetchfeeds/";
         // let url = 'http://localhost:8099/fetchfeeds';
         const config = {
             headers: {
@@ -527,7 +527,7 @@ const deletefeeditem = (e) => {
         // Before Ui Elements
         // Backend Submission
 
-        let url = "https://app.kiranvoleti.com/reactfetcher";
+        let url = "https://app.kiranvoleti.com/ui/admin/reactfetcher/";
         // let url = 'http://localhost:8099/fetchfeeds';
         const config = {
             headers: {
@@ -572,6 +572,7 @@ const deletefeeditem = (e) => {
         form_data.append('isactive', articlevideoisactive);
         form_data.append('author', articlevideoauthor);
 
+
         // Before Ui Elements
         setIsspinner(!isspinner);
         
@@ -584,7 +585,7 @@ const deletefeeditem = (e) => {
         // Before Ui Elements
         // Backend Submission
 
-        let url = "https://app.kiranvoleti.com/getarticlelist";
+        let url = "https://app.kiranvoleti.com/ui/admin/getarticlelist/";
         // let url = 'http://localhost:8099/fetchfeeds';
         const config = {
             headers: {
@@ -636,7 +637,7 @@ const deletefeeditem = (e) => {
         // Before Ui Elements
         // Backend Submission
 
-        let url = "https://app.kiranvoleti.com/getarticlelist";
+        let url = "https://app.kiranvoleti.com/ui/admin/getarticlelist/";
         // let url = 'http://localhost:8099/fetchfeeds';
         const config = {
             headers: {
@@ -691,7 +692,7 @@ const deletefeeditem = (e) => {
         // Before Ui Elements
         // Backend Submission
 
-        let url = "https://app.kiranvoleti.com/getvideolist";
+        let url = "https://app.kiranvoleti.com/ui/admin/getvideolist/";
         // let url = 'http://localhost:8099/fetchfeeds';
         const config = {
             headers: {
@@ -738,7 +739,7 @@ const deletefeeditem = (e) => {
         // Before Ui Elements
         // Backend Submission
 
-        let url = "https://app.kiranvoleti.com/getvideolist";
+        let url = "https://app.kiranvoleti.com/ui/admin/getvideolist/";
         // let url = 'http://localhost:8099/fetchfeeds';
         const config = {
             headers: {
@@ -794,7 +795,7 @@ const deletefeeditem = (e) => {
         // Before Ui Elements
         // Backend Submission
 
-        let url = "https://app.kiranvoleti.com/gettoollist";
+        let url = "https://app.kiranvoleti.com/ui/admin/gettoollist/";
         // let url = 'http://localhost:8099/fetchfeeds';
         const config = {
             headers: {
@@ -846,7 +847,7 @@ const deletefeeditem = (e) => {
         // Before Ui Elements
         // Backend Submission
 
-        let url = "https://app.kiranvoleti.com/gettoollist";
+        let url = "https://app.kiranvoleti.com/ui/admin/gettoollist/";
         // let url = 'http://localhost:8099/fetchfeeds';
         const config = {
             headers: {
@@ -998,7 +999,7 @@ const deletefeeditem = (e) => {
         form_data.append('URL', dynotoollink);
         form_data.append('title', dynotooltext);
 
-        let url = 'https://app.kiranvoleti.com/bulkreviewupdater';
+        let url = 'https://app.kiranvoleti.com/ui/admin/bulkreviewupdater/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -1100,7 +1101,7 @@ const deletefeeditem = (e) => {
         form_data.append('id', e.target.id);
         form_data.append('is_active', e.target.checked);
 
-        let url = 'https://app.kiranvoleti.com/statechanger';
+        let url = 'https://app.kiranvoleti.com/ui/admin/statechanger/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -1132,7 +1133,7 @@ const deletefeeditem = (e) => {
         form_data.append('id', e.target.id);
         form_data.append('isactive', e.target.checked);
         form_data.append('action', 'updateactive');
-        let url = 'https://app.kiranvoleti.com/articleUpdate';
+        let url = 'https://app.kiranvoleti.com/ui/admin/articleupdate/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -1160,7 +1161,7 @@ const deletefeeditem = (e) => {
         form_data.append('id', e.target.id);
         form_data.append('isactive', e.target.checked);
         form_data.append('action', 'videoactive');
-        let url = 'https://app.kiranvoleti.com/articleUpdate';
+        let url = 'https://app.kiranvoleti.com/ui/admin/articleupdate/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -1190,7 +1191,7 @@ const deletefeeditem = (e) => {
         form_data.append('action', 'toolactive');
         // console.log(e.target.id,e.target.checked)
         // return
-        let url = 'https://app.kiranvoleti.com/articleUpdate';
+        let url = 'https://app.kiranvoleti.com/ui/admin/articleupdate/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -1234,7 +1235,7 @@ const deletefeeditem = (e) => {
         form_data.append('isreview', articlevideoisview);
         
 
-        let url = 'https://app.kiranvoleti.com/bulkreviewupdater';
+        let url = 'https://app.kiranvoleti.com/ui/admin/bulkreviewupdater/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -1304,7 +1305,7 @@ const deletefeeditem = (e) => {
         form_data.append('is_active', articlevideoisactive);
         
 
-        let url = 'https://app.kiranvoleti.com/bulkreviewupdater';
+        let url = 'https://app.kiranvoleti.com/ui/admin/bulkreviewupdater/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -1375,7 +1376,7 @@ const deletefeeditem = (e) => {
         form_data.append('action', 'updatearticle');
 
 
-        let url = 'https://app.kiranvoleti.com/articleUpdate';
+        let url = 'https://app.kiranvoleti.com/ui/admin/articleupdate/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -1407,7 +1408,7 @@ const deletefeeditem = (e) => {
         form_data.append('action', 'updatevideo');
 
 
-        let url = 'https://app.kiranvoleti.com/articleUpdate';
+        let url = 'https://app.kiranvoleti.com/ui/admin/articleupdate/';
 
         const config = {
             headers: {
@@ -1439,7 +1440,7 @@ const deletefeeditem = (e) => {
         form_data.append('action', 'updatetool');
 
 
-        let url = 'https://app.kiranvoleti.com/articleUpdate';
+        let url = 'https://app.kiranvoleti.com/ui/admin/articleupdate/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -1483,7 +1484,7 @@ const deletefeeditem = (e) => {
         
         form_data.append('deletelist', list);
         form_data.append('tablename', 'Articles');
-        let url = 'https://app.kiranvoleti.com/bulkdeltereact';
+        let url = 'https://app.kiranvoleti.com/ui/admin/bulkdeltereact/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -1526,7 +1527,7 @@ const deletefeeditem = (e) => {
 
         form_data.append('deletelist', list);
         form_data.append('tablename', 'Videos');
-        let url = 'https://app.kiranvoleti.com/bulkdeltereact';
+        let url = 'https://app.kiranvoleti.com/ui/admin/bulkdeltereact/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -1572,7 +1573,7 @@ const deletefeeditem = (e) => {
 
         form_data.append('deletelist', list);
         form_data.append('tablename', 'Tools');
-        let url = 'https://app.kiranvoleti.com/bulkdeltereact';
+        let url = 'https://app.kiranvoleti.com/ui/admin/bulkdeltereact/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -1658,16 +1659,16 @@ const deletefeeditem = (e) => {
 
             sendforFetch, spin, delpin, topicstatuschange, howmanyfetch, fetchcategory,
 
-            sendforFetchtable, sendchannelfetch,
+            sendforFetchtable, sendchannelfetch,setArticlevideoperpage,articlevideoperpage,
 
             allarticles, totalresults, articlevideostatus, articlevideosearch, togglemodel,
             articlemodel, statetoggle,viewtoggle, articlevideoisactive, collectioncountarticle,
-            articlevideopage, articlevideoperpage, getallarticles, bulkdeleter,
+            articlevideopage, getallarticles, bulkdeleter,
             articlevideohandlesubmit, articlestatuschange,
             searchquery, paginationcount, handlePageClick, handlePageClickarticle,
             handlePageClickvideo,deletefeeditem,sitequery,authorquery,setFetchcategory,
             setArticlevideoisactive,setArticlevideoisview,setArticlevideosearch,setArticlevideoauthor,
-            setArticlevideochannel,        
+            setArticlevideochannel,articlevideoisview,        
 
 
 

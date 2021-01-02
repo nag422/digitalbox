@@ -116,7 +116,7 @@ const Userlisttable = (props) => {
         form_data.append('phone', editingform.phone);
         form_data.append('datacategory', editingform.datacategory);
         
-        let url = 'https://app.kiranvoleti.com/admin/edituser';
+        let url = 'https://app.kiranvoleti.com/ui/admin/edituser/';
         // console.log(editingform)
         // return
         
@@ -144,26 +144,25 @@ const Userlisttable = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         // let form_data = new FormData();
-        if (formchangedata.password === formchangedata.password1 && formchangedata.password.length < 5) {
-            props.setIsalert(!props.isalert)
-            setAlertmsg("plase check your password");
-            setAlertmsgcolor('danger');
+        
+        props.setIsalert(!props.isalert)
+        setAlertmsg("plase check your password");
+        setAlertmsgcolor('danger');
 
-        }
+        
         let form_data = new FormData();
-        form_data.append('username', formchangedata.email);
+        form_data.append('first_name', formchangedata.username);
         form_data.append('pwd', formchangedata.password);
         form_data.append('email', formchangedata.email);
         form_data.append('userrole', formchangedata.capability);
-        form_data.append('phonenumber', formchangedata.phone);
         console.log(formchangedata)
         
-        let url = 'https://app.kiranvoleti.com/saveuser';
+        let url = 'https://app.kiranvoleti.com/ui/admin/saveuser/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
                 'content-type': 'application/json',
-                // 'X-CSRFToken': this.getCookie('csrftoken')
+                'X-CSRFToken': getCookie('csrftoken')
             }
         }
         axios.post(url, form_data, config)
@@ -196,7 +195,7 @@ const Userlisttable = (props) => {
         form_data.append('user_id', e.target.id);
         form_data.append('is_active', e.target.checked);
         
-        let url = 'https://app.kiranvoleti.com/getuserupdate';
+        let url = 'https://app.kiranvoleti.com/ui/admin/getuserupdate/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -226,7 +225,7 @@ const Userlisttable = (props) => {
         form_data.append('capability', e.target.value);
         console.log(e.target.id,e.target.value)
         
-        let url = 'https://app.kiranvoleti.com/getuserupdateadmin';
+        let url = 'https://app.kiranvoleti.com/ui/admin/getuserupdateadmin/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -258,7 +257,7 @@ const Userlisttable = (props) => {
         form_data.append('capability', e.target.value);
         console.log(e.target.id,e.target.value)
         
-        let url = 'https://app.kiranvoleti.com/updatesubscribestatus';
+        let url = 'https://app.kiranvoleti.com/ui/admin/updatesubscribestatus/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -494,7 +493,7 @@ const Userlisttable = (props) => {
                             </th>
                             
                             <td>{row.email}</td>
-                            <td>{row.is_subscribed ? 'Subscribed':'Not Subscribed'}
+                            <td>{row.newsletter ? 'Subscribed':'Not Subscribed'}
                             
                             <select className="ml-2" id={row.email} name="subscribestate" onChange={subscribestatechange}>
                                     <option value="y">--is_subscribed--</option>
@@ -502,17 +501,11 @@ const Userlisttable = (props) => {
                                     <option value="n">Unsubscribe</option>
                                 </select>
                             </td>
-                            {
-                                row.userinfo.length > 0 ? row.userinfo.map((val) => (
-
-                                    <td key={val.id}>{val.phonenumber}</td>
-                                    
+                            
 
 
-                                )) : <td key={row.email}>----</td>}
-
-
-                    
+                            <td>{row.phone}</td>
+                            
                                 
                                 <td id={row._id}>
                                 <label className="custom-toggle">
@@ -530,6 +523,7 @@ const Userlisttable = (props) => {
                                 <span className="custom-toggle-slider rounded-circle" />
                               </label>
                                 </td>
+                                <td>All</td>
                                 <td>
                                 {row.is_superuser ? "Admin" : row.is_staff ? "Staff": "User"}
                                 <select className="ml-2" id={row._id} name="capability" onChange={adminstatus}>
@@ -541,14 +535,7 @@ const Userlisttable = (props) => {
                                 
                             </td>
                                 
-                                {
-                                row.userinfo.length > 0 ? row.userinfo.map((val) => (
-                                    
-                                    <td key={row.email}>{val.datacategory}</td>                                   
-                                    
-
-
-                                )) : <td key={row.id}>----</td>}
+         
 
                             
 
@@ -637,16 +624,7 @@ const Userlisttable = (props) => {
                                 <Input onChange={handleChange} placeholder="Email" id="email" name="email" type="email" />
                             </InputGroup>
                         </FormGroup>
-                        <FormGroup className="mb-3">
-                            <InputGroup className="input-group-alternative">
-                                <InputGroupAddon addonType="prepend">
-                                    <InputGroupText>
-                                        <i className="fa fa-phone" />
-                                    </InputGroupText>
-                                </InputGroupAddon>
-                                <Input onChange={handleChange} placeholder="Phone" id="phone" name="phone" type="text" />
-                            </InputGroup>
-                        </FormGroup>
+                        
                         <FormGroup>
                             <InputGroup className="input-group-alternative">
                                 <InputGroupAddon addonType="prepend">
@@ -657,16 +635,7 @@ const Userlisttable = (props) => {
                                 <Input onChange={handleChange} placeholder="Password" id="password" name="password" type="password" />
                             </InputGroup>
                         </FormGroup>
-                        <FormGroup>
-                            <InputGroup className="input-group-alternative">
-                                <InputGroupAddon addonType="prepend">
-                                    <InputGroupText>
-                                        <i className="ni ni-lock-circle-open" />
-                                    </InputGroupText>
-                                </InputGroupAddon>
-                                <Input onChange={handleChange} placeholder="Confirm Password" id="password1" name="password1" type="password" />
-                            </InputGroup>
-                        </FormGroup>
+                    
                         <FormGroup className="mb-3">
                             <InputGroup className="input-group-alternative">
                                 <InputGroupAddon addonType="prepend">

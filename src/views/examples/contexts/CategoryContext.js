@@ -167,7 +167,7 @@ const CategoryProvider = ({ children, match }) => {
         let form_data = new FormData();
         form_data.append('category', formchangedata.category);
 
-        let url = "https://app.kiranvoleti.com/addmaincat";
+        let url = "https://app.kiranvoleti.com/ui/admin/addmaincat/";
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -212,7 +212,7 @@ const CategoryProvider = ({ children, match }) => {
         form_data.append('catdata', formchangedata.category);
         form_data.append('catid', editingform.id);
 
-        let url = "https://app.kiranvoleti.com/main_cat_update/";
+        let url = "https://app.kiranvoleti.com/ui/admin/main_cat_update/";
         const config = {
             headers: {
                 'content-type': 'application/json',
@@ -256,7 +256,7 @@ const CategoryProvider = ({ children, match }) => {
         let form_data = new FormData();
         form_data.append('category', e.target.id);
 
-        let url = "https://app.kiranvoleti.com/delmaincat";
+        let url = "https://app.kiranvoleti.com/ui/admin/delmaincat/";
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -292,7 +292,7 @@ const CategoryProvider = ({ children, match }) => {
 
 
 
-    const url = "https://app.kiranvoleti.com/addmaincat";
+    const url = "https://app.kiranvoleti.com/ui/admin/addmaincat/";
 
     useEffect(() => {
         const fetchusers = async () => {
@@ -323,7 +323,7 @@ const subcatgorydeletebutton = (e) => {
     let form_data = new FormData();
     form_data.append('catid', e.target.dataset.id);
 
-    let url = "https://app.kiranvoleti.com/sub_cat_delete/";
+    let url = "https://app.kiranvoleti.com/ui/admin/sub_cat_delete/";
     
     const config = {
         headers: {
@@ -382,7 +382,7 @@ const subcatgorydeletebutton = (e) => {
         form_data.append('category', formchangedata.category);
         form_data.append('mainref', formchangedata.mainref);
 
-        let url = "https://app.kiranvoleti.com/addsubcat";
+        let url = "https://app.kiranvoleti.com/ui/admin/addsubcat/";
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -435,7 +435,7 @@ const subcatgorydeletebutton = (e) => {
         form_data.append('refrence', formchangedata.mainref);
         form_data.append('masterrefrence', formchangedata.superref);
 
-        let url = "https://app.kiranvoleti.com/addsupsubcat";
+        let url = "https://app.kiranvoleti.com/ui/admin/addsupsubcat/";
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -475,7 +475,7 @@ const supsubcatgorydeletebutton = (e) => {
     let form_data = new FormData();
     form_data.append('catid', e.target.dataset.id);
 
-    let url = "https://app.kiranvoleti.com/sup_sub_cat_delete/";
+    let url = "https://app.kiranvoleti.com/ui/admin/sup_sub_cat_delete/";
     
     const config = {
         headers: {

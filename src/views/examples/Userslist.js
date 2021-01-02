@@ -33,25 +33,28 @@ const Userslist = (props) => {
   const {currentpage, setCurrentpage, totalpages,setTotalpages} = useContext(PaginationContext); 
   const [isalert,setIsalert] = useState(false)
   
-  useEffect(() => {
-    if(window.localStorage.getItem('usertype') !== "superuser"){
-      props.history.push('/admin/categories/manage')
-    }
+  // useEffect(() => {
+  //   if(window.localStorage.getItem('usertype') !== "superuser"){
+  //     props.history.push('/admin/categories/manage')
+  //   }
     
-  }, [])
+  // }, [])
   const paginate = async (e) => {   
     
-    const url="https://app.kiranvoleti.com/getuserlist";
-    let form_data = new FormData();
-    form_data.append('page', e);
+    const url="https://app.kiranvoleti.com/ui/getuserlist/";
+    const body = JSON.stringify({
+      'page':e,
+    })
+   
     setCurrentpage(e)
     const config = {
       headers: {
-          'content-type': 'application/json',
-          // 'X-CSRFToken': this.getCookie('csrftoken')
+          'Content-Type': 'application/json',
+          'Accept':'application/json',
+          'X-CSRFToken': getCookie('csrftoken')
       }
     }
-    await axios.post(url, form_data, config)
+    await axios.get(url, body, config)
     .then(res=>{            
         setUsers(res.data.users); 
         setIsalert(false)                       
@@ -65,16 +68,19 @@ const Userslist = (props) => {
     
   }
   const fetchusers = async () => {
-    const url="https://app.kiranvoleti.com/getuserlist";
-    let form_data = new FormData();
-    form_data.append('page', currentpage);
+    const url="https://app.kiranvoleti.com/ui/getuserlist/";
+    
+    const form_data = new FormData();
+    form_data.append('page',currentpage)
+
     const config = {
       headers: {
-          'content-type': 'application/json',
-          'X-CSRFToken': getCookie('csrftoken')
+        'Content-Type': 'application/json',
+        'Accept':'application/json',
+        'X-CSRFToken': getCookie('csrftoken')
       }
     }
-    await axios.post(url, form_data, config)
+    await axios.get(url, form_data, config)
     .then(res=>{            
         setUsers(res.data.users);                        
         setIsalert(false)
@@ -86,7 +92,7 @@ const Userslist = (props) => {
 }
 
 const fetchfromdatabase = async (e) => {
-  const url="https://app.kiranvoleti.com/getuserlistsearch";
+  const url="https://app.kiranvoleti.com/ui/getuserlistsearch/";
   console.log(e.target.value)
   let form_data = new FormData();
   form_data.append('searchterm',e.target.value.toLowerCase())
@@ -94,6 +100,7 @@ const fetchfromdatabase = async (e) => {
     headers: {
         'content-type': 'application/json',
         'X-CSRFToken': getCookie('csrftoken')
+        // 'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjA5Mjc2Nzg1LCJqdGkiOiIwZjM0YzYxZDczZWI0NzMxODlhMjUxYjA0MWQ5YmUwYSIsInVzZXJfaWQiOjF9.FAp0NBCBufFmJ8Prr0ZBRz0aCZQHlLp4aUVcCLer9oE'
     }
   }
   await axios.post(url, form_data, config)
@@ -127,8 +134,8 @@ const deleteUser = async (e) => {
   
 
    form_data.append('deletelist', list);
-   form_data.append('tablename', 'auth_user');
-   let url = 'https://app.kiranvoleti.com/bulkdeltereactusers';
+   form_data.append('tablename', 'backend_useraccount');
+   let url = 'https://app.kiranvoleti.com/ui/bulkdeltereactusers/';
    // let url = 'https://jsonplaceholder.typicode.com/todos';
    const config = {
        headers: {
@@ -142,6 +149,7 @@ const deleteUser = async (e) => {
 
            tosttrigger(res.data.msg, "success");
            fetchusers()
+           console.log('deleted')
 
        })
        .catch(err =>
@@ -161,8 +169,8 @@ const deleteUserind = async (e) => {
   
 
    form_data.append('deletelist', list);
-   form_data.append('tablename', 'auth_user');
-   let url = 'https://app.kiranvoleti.com/bulkdeltereactusers';
+   form_data.append('tablename', 'backend_useraccount');
+   let url = 'https://app.kiranvoleti.com/ui/bulkdeltereactusers/';
    // let url = 'https://jsonplaceholder.typicode.com/todos';
    const config = {
        headers: {

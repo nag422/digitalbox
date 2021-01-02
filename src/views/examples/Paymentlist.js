@@ -21,13 +21,12 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
-import Tagstable from "./tables/Tagstable";
 import PaginationComponent from "react-reactstrap-pagination";
-import Paginationtable from "./tables/Paginationtable";
+import Paymentlisttable from "./tables/Paymentlisttable";
 import { ToastContainer, toast } from 'react-toastify';
 // import { UsersContext, QueryContext, PaginationContext } from './contexts/UserContext';
 import { Redirect } from 'react-router-dom'
-const Subscribelist = (props) => {
+const Paymentlist = (props) => {
   const [subscribers, setSubscribers] = useState([]);
   const [tags, setTags] = useState([]);
   const [q, setQ] = useState('');  
@@ -36,6 +35,7 @@ const Subscribelist = (props) => {
   const [isalert,setIsalert] = useState(false);
   const [stateallchecked, setStateallchecked] = useState(false);
   const [taglist,setTaglist] = useState('')
+  const [sortby,setSortby] = useState(true)
   
   useEffect(() => {
     // if(window.localStorage.getItem('usertype') !== "superuser"){
@@ -47,9 +47,10 @@ const Subscribelist = (props) => {
 
   const paginate = async (e) => {   
     
-    const url="https://app.kiranvoleti.com/ui/admin/tagslist/";
+    const url="https://app.kiranvoleti.com/ui/admin/paymentlist/";
     let form_data = new FormData();
     form_data.append('page', e);
+    form_data.append('sort', sortby);
     setCurrentpage(e)
     const config = {
       headers: {
@@ -78,9 +79,11 @@ const Subscribelist = (props) => {
 
   
   const fetchtags = async () => {
-    const url="https://app.kiranvoleti.com/ui/admin/tagslist/";
+    const url="https://app.kiranvoleti.com/ui/admin/paymentlist/";
     let form_data = new FormData();
     form_data.append('page', currentpage);
+    form_data.append('sort', sortby);
+    form_data.append('searchterm','')
     const config = {
       headers: {
           'content-type': 'application/json',
@@ -148,7 +151,7 @@ const handlesubmit = (e) => {
   // Before Ui Elements
   // Backend Submission
 
-  let url = "https://app.kiranvoleti.com/ui/admin/tagscreate/";
+  let url = "https://app.kiranvoleti.com/tagscreate";
   // let url = 'https://jsonplaceholder.typicode.com/todos';
   const config = {
       headers: {
@@ -174,32 +177,9 @@ const handlesubmit = (e) => {
 
 }
 // End Hndle Submit Section
-const fetchfromdatabase = async (e) => {
-  const url="https://app.kiranvoleti.com/getsubscriberssearch";
-  
-  let form_data = new FormData();
-  form_data.append('searchterm',e.target.value.toLowerCase())
-  const config = {
-    headers: {
-        'content-type': 'application/json'
-        // 'X-CSRFToken': getCookie('csrftoken')
-    }
-  }
-  await axios.post(url, form_data, config)
-  .then(res=>{            
-    setSubscribers(res.data.users); 
-      setIsalert(false); 
-                            
-      
-  })
-  .catch(err=>{
-      console.log(err)
-  })
-}
 
 
-
-const deleteUser = async (e) => {        
+const deletepayment = async (e) => {        
   // Deleter
 
 
@@ -216,8 +196,8 @@ const deleteUser = async (e) => {
   
 
    form_data.append('deletelist', list);
-   form_data.append('tablename', 'keytags');
-   let url = 'https://app.kiranvoleti.com/ui/admin/bulkdeltereact/';
+   form_data.append('tablename', 'payments');
+   let url = 'https://app.kiranvoleti.com/ui/bulkdeltereact/';
    // let url = 'https://jsonplaceholder.typicode.com/todos';
    const config = {
        headers: {
@@ -239,40 +219,116 @@ const deleteUser = async (e) => {
 
        )
 }
-const deleteUserind = async (e) => {        
-  // Deleter
 
 
 
-   let form_data = new FormData();
-   var list = []
-   list.push(e.target.dataset.id)      
- 
+  const subscriptionalert = async (e) => {        
+    // Subscriptionalert 
   
+  
+     let form_data = new FormData();
+     var list = []
+     var allelm = document.querySelectorAll("input[name=childbox]");
+  
+     await allelm.forEach(elm => {
+         if (elm.checked) {
+             list.push(elm.id)           
+         }
+     })
+    
+  
+     form_data.append('deletelist', list);
+     form_data.append('tablename', 'payments');
+     let url = 'https://app.kiranvoleti.com/ui/admin/subscriptionalert/';
+     // let url = 'https://jsonplaceholder.typicode.com/todos';
+     const config = {
+         headers: {
+             'content-type': 'application/json',
+             'X-CSRFToken': getCookie('csrftoken')
+         }
+     }
+  
+     axios.post(url, form_data, config)
+         .then(res => {
+  
+             tosttrigger(res.data.resonse, "success");
+             
+             
+  
+         })
+         .catch(err =>
+             tosttrigger("Something Went Wrong !", "error")
+  
+         )
+  }
 
-   form_data.append('deletelist', list);
-   form_data.append('tablename', 'lunchbox_subscriptions');
-   let url = 'https://app.kiranvoleti.com/ui/admin/bulkdeltereactusers/';
-   // let url = 'https://jsonplaceholder.typicode.com/todos';
-   const config = {
-       headers: {
-           'content-type': 'application/json',
-           'X-CSRFToken': getCookie('csrftoken')
-       }
-   }
+  const sortbydate = async (e) => {        
+    // sortbydate
+  
+  
+    setSortby(!sortby)
+    const url="https://app.kiranvoleti.com/ui/admin/paymentlist/";
+    let form_data = new FormData();
+    form_data.append('page', currentpage);
+    form_data.append('sort', sortby);
+    form_data.append('searchterm','');
+    
+    
+    const config = {
+      headers: {
+          'content-type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken')
+      }
+    }
+    await axios.post(url, form_data, config)
+    .then(res=>{            
+      var resptags = res.data.tags.map(val => (
+        { ...val, ischecked: false }
+    ))
+        setTags(resptags);       
+        setTotalpages(res.data.total)                 
+        setIsalert(false)
+        
+    })
+    .catch(err=>{
+        console.log(err)
+        setIsalert(false)
+    })
+  }
 
-   axios.post(url, form_data, config)
-       .then(res => {
 
-           tosttrigger(res.data.msg, "success");
-           
 
-       })
-       .catch(err =>
-           tosttrigger("Something Went Wrong !", "error")
 
-       )
-}
+  const fetchfromdatabase = async (e) => {
+    
+    const url="https://app.kiranvoleti.com/ui/admin/paymentlist/";
+    console.log(e.target.value)
+    let form_data = new FormData();
+    form_data.append('page', '0');
+    form_data.append('sort', sortby);
+    form_data.append('searchterm',e.target.value.toLowerCase())
+    const config = {
+      headers: {
+          'content-type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken')
+      }
+    }
+    await axios.post(url, form_data, config)
+    .then(res=>{            
+      var resptags = res.data.tags.map(val => (
+        { ...val, ischecked: false }
+    ))
+        setTags(resptags);       
+        setTotalpages(res.data.total)                 
+        setIsalert(false)
+        
+    })
+    .catch(err=>{
+        console.log(err)
+        setIsalert(false)
+    })
+  }
+  
 function tosttrigger(msg,status){
   if(status === "success"){
 
@@ -335,31 +391,27 @@ const getCookie = (name) => {
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-                <h3 className="mb-0">Tags List</h3>
+                <h3 className="mb-0">Payment List</h3>
               </CardHeader>
-              <Form>
-                <Row>
-                 
-                  <Col md="10 m-2">
-                    <FormGroup>
+
+              <FormGroup>
                     <InputGroup className="mb-4">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i className="ni ni-tag" />
+                      <i className="ni ni-zoom-split-in" />
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input onChange={(e) => setTaglist(e.target.value)} placeholder="tags by enter" name="taglist" id="taglist" type="textarea" />
+                  <Input placeholder="Search from Database" onChange={fetchfromdatabase} type="text" />
                 </InputGroup>
-                  <Button color="primary" onClick={handlesubmit} outline type="button">Submit</Button>
-                    </FormGroup>
-                  </Col>                  
-                </Row>
-              </Form>              
+              </FormGroup>
+                          
 
-              <Tagstable 
+              <Paymentlisttable 
               
               fetchtags = {fetchtags} 
-              deleteUserind = {deleteUserind} deleteUser = {deleteUser} 
+              deletepayment = {deletepayment} 
+              sortbydate = {sortbydate} 
+              subscriptionalert = {subscriptionalert}               
               tags={tags} totalpages={totalpages}
               handleCheckchange = {handleCheckchange}
               handleAllChecked = {handleAllChecked}
@@ -408,4 +460,4 @@ const getCookie = (name) => {
 }
 
 
-export default Subscribelist;
+export default Paymentlist;

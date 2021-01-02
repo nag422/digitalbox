@@ -1,6 +1,5 @@
 import React, {useState,createContext, useEffect} from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 export const UsersContext = createContext();
 export const QueryContext = createContext();
 export const PaginationContext = createContext();
@@ -15,19 +14,29 @@ const UsersProvider = ({children})=> {
     
     
     
-    const url = "https://app.kiranvoleti.com/getuserlist";
+    
     
 
     useEffect(() => {
-        const fetchusers = async () => {     
-                   
-
+           
+        const url = "https://app.kiranvoleti.com/ui/getuserlist/";
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',                
+                'Accept': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+                
+            }
+        };
        
-        await axios.get(url)
+        axios.get(url,config)
         .then(res=>{            
             setUsers(res.data.users);
             // setCurrentpage(prevCurrentpage => prevCurrentpage+1)
-            setTotalpages(res.data.total);           
+            setTotalpages(res.data.total);      
+            console.log(res.data.users)
+               
+
                     
             
         })
@@ -35,8 +44,8 @@ const UsersProvider = ({children})=> {
             console.log(err)
         })
     }
-    fetchusers()
-    },[])
+    
+    ,[])
 
 
     // Get Current Posts
@@ -49,8 +58,12 @@ const UsersProvider = ({children})=> {
     function search(rows) {
         return rows.filter(
             (row) =>
-            row.username.toLowerCase().indexOf(q) > -1 ||
+            
+                // row.first_name.toLowerCase().indexOf(q) > -1 ||
             row.email.toLowerCase().indexOf(q) > -1
+
+         
+            
         )
     }
 
@@ -60,6 +73,21 @@ const UsersProvider = ({children})=> {
             -1 * a['name'].localeCompare(b['name'])
         ))
     }
+    const getCookie = (name) => {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
 
 
 

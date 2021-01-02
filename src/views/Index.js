@@ -74,7 +74,7 @@ class Index extends React.Component {
           'X-CSRFToken': this.getCookie('csrftoken')
       }
     }
-    await axios.get(url)
+    await axios.get(url,config)
     .then(res=>{            
         
         this.setState({

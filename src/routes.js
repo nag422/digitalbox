@@ -6,6 +6,10 @@ import Subcategories from "views/examples/Subcategories.js";
 import Supsubcategories from "views/examples/Supsubcategories.js";
 import Topicsforms from "views/examples/Topicsforms.js";
 import Lettersubscription from "views/examples/Lettersubscription";
+import Popularlist from "views/examples/Popularlist";
+import Paymentlist from "views/examples/Paymentlist";
+
+
 // import Icons from "views/examples/Icons.js";
 
 var routes = [
@@ -15,7 +19,7 @@ var routes = [
     icon: "ni ni-tv-2 text-primary",
     component: Index,
     layout: "/admin",
-    displayproperty: localStorage.getItem('usertype') !== "superuser" ? 'block' : 'block'  
+    displayproperty: localStorage.getItem('userrole') !== "superuser" ? 'block' : 'block'  
   },
   // {
   //   path: "/icons",
@@ -44,7 +48,7 @@ var routes = [
     icon: "ni ni-badge text-gray",
     component: Userslist,
     layout: "/admin",
-    displayproperty: localStorage.getItem('usertype') !== "superuser" ? 'none' : 'block'  
+    displayproperty: localStorage.getItem('userrole') !== "superuser" ? 'none' : 'block'  
   },
   
   {
@@ -53,7 +57,7 @@ var routes = [
     icon: "ni ni-bullet-list-67 text-red",
     component: Categories,
     layout: "/admin",
-    displayproperty: localStorage.getItem('usertype') !== "superuser" ? 'none' : 'block'  
+    displayproperty: localStorage.getItem('userrole') !== "superuser" ? (localStorage.getItem('userrole') === "staff"?'block':'none') : 'block'  
   },
   {
     path: "/categories/subcategories",
@@ -61,7 +65,7 @@ var routes = [
     icon: "ni ni-bullet-list-67 text-gray",
     component: Subcategories,
     layout: "/admin",
-    displayproperty: localStorage.getItem('usertype') !== "superuser" ? 'none' : 'block'  
+    displayproperty: localStorage.getItem('userrole') !== "superuser" ? (localStorage.getItem('userrole') === "staff"?'block':'none') : 'block'  
   },
   {
     path: "/categories/supersubcategories",
@@ -69,7 +73,7 @@ var routes = [
     icon: "ni ni-bullet-list-67 text-gray",
     component: Supsubcategories,
     layout: "/admin",
-    displayproperty: localStorage.getItem('usertype') !== "superuser" ? 'none' : 'block'  
+    displayproperty: localStorage.getItem('userrole') !== "superuser" ? (localStorage.getItem('userrole') === "staff"?'block':'none') : 'block'  
   },
   {
     path: "/categories/manage",
@@ -77,7 +81,7 @@ var routes = [
     icon: "ni ni-collection text-gray",
     component: Topicsforms,
     layout: "/admin",
-    displayproperty: localStorage.getItem('usertype') === "superuser" ? 'block' : 'block'  
+    displayproperty: localStorage.getItem('userrole') !== "superuser" ? (localStorage.getItem('userrole') === "staff"?'block':'none') : 'block'  
   },
   {
     path: "/categories/daily",
@@ -85,7 +89,8 @@ var routes = [
     icon: "ni ni-send text-gray",
     component: Lettersubscription,
     layout: "/admin",
-    displayproperty: localStorage.getItem('usertype') === "superuser" ? 'block' : 'none'  
+    displayproperty: localStorage.getItem('userrole') !== "superuser" ? (localStorage.getItem('userrole') === "staff"?'block':'none') : 'block'  
+
   },
   {
     path: "/tags",
@@ -93,8 +98,24 @@ var routes = [
     icon: "ni ni-tag text-gray",
     component: Subscribelist,
     layout: "/admin",
-    displayproperty: localStorage.getItem('usertype') !== "superuser" ? 'block' : 'block'  
+    displayproperty: localStorage.getItem('userrole') !== "superuser" ? 'none' : 'block'  
   },
+  {
+    path: "/popularlist",
+    name: "Popular Tools",
+    icon: "ni ni-active-40 text-gray",
+    component: Popularlist,
+    layout: "/admin",
+    displayproperty: localStorage.getItem('userrole') !== "superuser" ? 'none' : 'block'  
+  },
+  {
+    path: "/payments",
+    name: "Payments",
+    icon: "ni ni-credit-card text-gray",
+    component: Paymentlist,
+    layout: "/admin",
+    displayproperty: localStorage.getItem('userrole') !== "superuser" ? 'none' : 'block'  
+  }
   // {
   //   path: "/login",
   //   name: "Login",

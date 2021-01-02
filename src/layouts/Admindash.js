@@ -12,20 +12,45 @@ import routes from "routes.js";
 
 class Admindash extends React.Component {
   componentDidMount(e) {
-    const authurl = "https://app.kiranvoleti.com/authcheck";
-    
-     axios.get(authurl).then(res=>{
-            if (res.data.issuperuser === true){
+    const getCookie = (name) => {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
 
-                localStorage.setItem('usertype', 'superuser');     
+    const authurl = "https://app.kiranvoleti.com/authcheck/";
+    const config = {
+      headers: {
+          'Content-Type': 'application/json',                
+          'Accept': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken')
+          
+      }
+  };
+    
+     axios.get(authurl,config).then(res=>{
+       console.log(res.data)
+            if (res.data.issuperuser){
+
+                localStorage.setItem('userrole', 'superuser');     
                  
                        
-            }else if (res.data.isstaff === true){
-                localStorage.setItem('usertype', 'staff');  
+            }else if (res.data.isstaff){
+                localStorage.setItem('userrole', 'staff');  
                   
             }
             else{
-                localStorage.setItem('usertype', 'user');  
+                localStorage.setItem('userrole', 'user');  
                 // window.location.assign("/login")
                 
 

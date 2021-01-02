@@ -256,10 +256,10 @@ function Topicsforms(props) {
                                                     }
                                                     {topicmanager.feedform.typeofsubmit === "channel" ?
 
-                                                    <Button outline color="danger" size="sm" onClick={topicmanager.sendchannelfetch} >Fetch Video Channels</Button>
-                                                    
-                                                    :
-                                                    null
+                                                        <Button outline color="danger" size="sm" onClick={topicmanager.sendchannelfetch} >Fetch Video Channels</Button>
+
+                                                        :
+                                                        null
                                                     }
                                                     {/* <Button color="secondary" onClick={topicmanager.delpin} >Delete</Button> */}
 
@@ -295,7 +295,7 @@ function Topicsforms(props) {
                                                 {/* <Col md='6'>
                                                     <h4 className="text-center">Fetching to Tables</h4>
                                                     <FormGroup className="m-3"> */}
-                                                        {/* <Label for="fetchcategory">Select type</Label>
+                                                {/* <Label for="fetchcategory">Select type</Label>
                                                         <Input type="select" name="fetchcategory" id="fetchcategory"
                                                             onChange={topicmanager.rhandleChange}
                                                         >
@@ -307,11 +307,11 @@ function Topicsforms(props) {
 
 
                                                         </Input> */}
-                                                        {/* {topicmanager.feedform.typeofsubmit === "video" ?
+                                                {/* {topicmanager.feedform.typeofsubmit === "video" ?
                                                             <Button outline color="info" size="sm" onClick={topicmanager.sendforvideoFetch} >Youtube Fetch</Button>
                                                             : <Button outline size="sm" color="info" onClick={topicmanager.sendforFetchtable} >Fetch to Tables</Button>
                                                         } */}
-                                                    {/* </FormGroup>
+                                                {/* </FormGroup>
                                                 </Col> */}
                                             </Row>
                                             {topicmanager.isspinner ?
@@ -351,21 +351,21 @@ function Topicsforms(props) {
 
                                             <Row>
                                                 <Col md="12">
-                                                <FormGroup>
-                                                            <Button outline color="primary" size="sm" onClick={topicmanager.getallarticles} >Refresh</Button>
-                                                            <Button outline color="warning" size="sm" onClick={topicmanager.bulkdeleter} >Delete</Button>
-                                                            <Button outline color="info" size="sm" id="Articles" onClick={topicmanager.reviewupdate} >Change Review</Button>
-                                                            <Button outline color="success" size="sm" id="Articles" onClick={topicmanager.statusupdate} >Change Status</Button>
+                                                    <FormGroup>
+                                                        <Button outline color="primary" size="sm" onClick={topicmanager.getallarticles} >Refresh</Button>
+                                                        <Button outline color="warning" size="sm" onClick={topicmanager.bulkdeleter} >Delete</Button>
+                                                        <Button outline color="info" size="sm" id="Articles" onClick={topicmanager.reviewupdate} >Change Review</Button>
+                                                        <Button outline color="success" size="sm" id="Articles" onClick={topicmanager.statusupdate} >Change Status</Button>
 
-                                                        </FormGroup>
+                                                    </FormGroup>
                                                     <Form inline>
-                                                       
 
                                                         <FormGroup className="m-1">
 
                                                             <Label for="isactive">state: {topicmanager.articlevideoisactive}</Label>
                                                             <Input bsSize="sm" type="select" name="isactive" id="isactive"
                                                                 onChange={topicmanager.statetoggle}
+                                                                value={topicmanager.articlevideoisactive}
                                                             >
                                                                 <option value="">Select Option</option>
                                                                 <option value={true}>Active</option>
@@ -380,6 +380,7 @@ function Topicsforms(props) {
 
                                                             <Label for="isreview"> Review: </Label>
                                                             <Input bsSize="sm" type="select" name="isreview" id="isreview"
+                                                                value={topicmanager.articlevideoisview}
                                                                 onChange={topicmanager.viewtoggle}
                                                             >
                                                                 <option value="">Select Option</option>
@@ -393,15 +394,39 @@ function Topicsforms(props) {
                                                         </FormGroup>
                                                         <FormGroup className="m-1">
                                                             <Label for="channelid">website: </Label>
-                                                            <Input bsSize="sm" onChange={topicmanager.sitequery} placeholder="Enter website term" id="channelid" name="channelid" />
+                                                            <Input bsSize="sm"
+                                                                onChange={topicmanager.sitequery}
+                                                                placeholder="Enter website term"
+                                                                id="channelid" name="channelid" />
                                                         </FormGroup>
                                                         <FormGroup className="m-1">
                                                             <Label for="authorquery">author: </Label>
                                                             <Input bsSize="sm" onChange={topicmanager.authorquery} placeholder="Enter authorquery" id="authorquery" name="authorquery" />
                                                         </FormGroup>
                                                         <FormGroup className="m-1">
-                                                        <Label for="q">search query: </Label>
-                                                            <Input bsSize="sm" onChange={topicmanager.searchquery} placeholder="Enter Query" id="q" name="q" />
+                                                            <Label for="q">search query: </Label>
+                                                            <Input bsSize="sm" value={topicmanager.articlevideosearch} onChange={topicmanager.searchquery} placeholder="Enter Query" id="q" name="q" />
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+                                                            <Label for="perpage">Per page: </Label>
+
+                                                            <Input
+                                                                value={topicmanager.articlevideoperpage}
+                                                                type="select" bsSize="sm"
+                                                                onChange={(e) => topicmanager.setArticlevideoperpage(e.target.value)}
+                                                                placeholder="Perpage" id="perpage" name="perpage">
+                                                                <option value="">Select Option</option>
+                                                                <option value={50}>50</option>
+                                                                <option value={100}>100</option>
+                                                                <option value={150}>150</option>
+                                                                <option value={200}>200</option>
+                                                                <option value={250}>250</option>
+                                                                <option value={300}>300</option>
+
+
+
+
+                                                            </Input>
                                                         </FormGroup>
                                                     </Form>
 
@@ -431,7 +456,7 @@ function Topicsforms(props) {
                                                             /> */}
                                                         <PaginationComponent
                                                             totalItems={topicmanager.totalresults}
-                                                            pageSize={50}
+                                                            pageSize={+topicmanager.articlevideoperpage}
                                                             onSelect={topicmanager.handlePageClickarticle}
                                                             maxPaginationNumbers={5}
                                                             defaultActivePage={1}
@@ -445,26 +470,21 @@ function Topicsforms(props) {
 
 
                                                 </Col>
-                                            </Row>
-                                        </TabPane>
-                                        <TabPane tabId="tabs4">
+                                                <Col md="12">
+                                                    <FormGroup>
+                                                        <Button outline color="primary" size="sm" onClick={topicmanager.getallarticles} >Refresh</Button>
+                                                        <Button outline color="warning" size="sm" onClick={topicmanager.bulkdeleter} >Delete</Button>
+                                                        <Button outline color="info" size="sm" id="Articles" onClick={topicmanager.reviewupdate} >Change Review</Button>
+                                                        <Button outline color="success" size="sm" id="Articles" onClick={topicmanager.statusupdate} >Change Status</Button>
 
-                                            <Row>
-                                                <Col md="12">  
-                                                <FormGroup>
-                                                            <Button outline color="primary" size="sm" onClick={topicmanager.getallvideos} >Refresh</Button>
-                                                            <Button outline color="warning" size="sm" onClick={topicmanager.bulkdeletervideos} >Delete</Button>
-                                                            <Button outline color="info" size="sm" id="Videos" onClick={topicmanager.reviewupdate} >Change Review</Button>
-                                                            <Button outline color="success" size="sm" id="Videos" onClick={topicmanager.statusupdate} >Change Status</Button>
+                                                    </FormGroup>
+                                                    <Form inline>
 
-                                                        </FormGroup>     
-                                                <Form inline>
-                                                                                                   
 
                                                         <FormGroup className="m-1">
 
                                                             <Label for="isactive">state: {topicmanager.articlevideoisactive}</Label>
-                                                            <Input bsSize="sm" type="select" name="isactive" id="isactive"
+                                                            <Input bsSize="sm" value={topicmanager.articlevideoisactive} type="select" name="isactive" id="isactive"
                                                                 onChange={topicmanager.statetoggle}
                                                             >
                                                                 <option value="">Select Option</option>
@@ -481,6 +501,90 @@ function Topicsforms(props) {
                                                             <Label for="isreview"> Review: </Label>
                                                             <Input bsSize="sm" type="select" name="isreview" id="isreview"
                                                                 onChange={topicmanager.viewtoggle}
+                                                                value={topicmanager.articlevideoisview}
+                                                            >
+                                                                <option value="">Select Option</option>
+                                                                <option value={true}>Marked as Reviewed</option>
+                                                                <option value={false}>Not Reviewed</option>
+
+
+
+                                                            </Input>
+
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+                                                            <Label for="channelid">website: </Label>
+                                                            <Input bsSize="sm" onChange={topicmanager.sitequery} placeholder="Enter website term" id="channelid" name="channelid" />
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+                                                            <Label for="authorquery">author: </Label>
+                                                            <Input bsSize="sm" onChange={topicmanager.authorquery} placeholder="Enter authorquery" id="authorquery" name="authorquery" />
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+                                                            <Label for="q">search query: </Label>
+                                                            <Input bsSize="sm" value={topicmanager.articlevideosearch} onChange={topicmanager.searchquery} placeholder="Enter Query" id="q" name="q" />
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+                                                            <Label for="perpage">Per page: </Label>
+                                                            <Input
+                                                                value={topicmanager.articlevideoperpage}
+                                                                type="select" bsSize="sm"
+                                                                onChange={(e) => topicmanager.setArticlevideoperpage(e.target.value)}
+                                                                placeholder="Perpage" id="perpage" name="perpage">
+                                                                <option value="">Select Option</option>
+                                                                <option value={50}>50</option>
+                                                                <option value={100}>100</option>
+                                                                <option value={150}>150</option>
+                                                                <option value={200}>200</option>
+                                                                <option value={250}>250</option>
+                                                                <option value={300}>300</option>
+
+
+
+
+                                                            </Input>
+                                                        </FormGroup>
+                                                    </Form>
+
+                                                </Col>
+                                            </Row>
+                                        </TabPane>
+                                        <TabPane tabId="tabs4">
+
+                                            <Row>
+                                                <Col md="12">
+                                                    <FormGroup>
+                                                        <Button outline color="primary" size="sm" onClick={topicmanager.getallvideos} >Refresh</Button>
+                                                        <Button outline color="warning" size="sm" onClick={topicmanager.bulkdeletervideos} >Delete</Button>
+                                                        <Button outline color="info" size="sm" id="Videos" onClick={topicmanager.reviewupdate} >Change Review</Button>
+                                                        <Button outline color="success" size="sm" id="Videos" onClick={topicmanager.statusupdate} >Change Status</Button>
+
+                                                    </FormGroup>
+                                                    <Form inline>
+
+
+                                                        <FormGroup className="m-1">
+
+                                                            <Label for="isactive">state: {topicmanager.articlevideoisactive}</Label>
+                                                            <Input bsSize="sm" type="select" name="isactive" id="isactive"
+                                                                onChange={topicmanager.statetoggle}
+                                                                value={topicmanager.articlevideoisactive}
+                                                            >
+                                                                <option value="">Select Option</option>
+                                                                <option value={true}>Active</option>
+                                                                <option value={false}>Deactivated</option>
+
+
+
+                                                            </Input>
+
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+
+                                                            <Label for="isreview"> Review: </Label>
+                                                            <Input bsSize="sm" type="select" name="isreview" id="isreview"
+                                                                onChange={topicmanager.viewtoggle}
+                                                                value={topicmanager.articlevideoisview}
                                                             >
                                                                 <option value="">Select Option</option>
                                                                 <option value={true}>Marked as Reviewed</option>
@@ -496,8 +600,28 @@ function Topicsforms(props) {
                                                             <Input bsSize="sm" onChange={topicmanager.sitequery} placeholder="Enter Channelid" id="channelid" name="channelid" />
                                                         </FormGroup>
                                                         <FormGroup className="m-1">
-                                                        <Label for="channelid">search query: </Label>
-                                                            <Input bsSize="sm" onChange={topicmanager.searchquery} placeholder="Enter Query" id="q" name="q" />
+                                                            <Label for="channelid">search query: </Label>
+                                                            <Input bsSize="sm" value={topicmanager.articlevideosearch} onChange={topicmanager.searchquery} placeholder="Enter Query" id="q" name="q" />
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+                                                            <Label for="perpage">Per page: </Label>
+                                                            <Input
+                                                                value={topicmanager.articlevideoperpage}
+                                                                type="select" bsSize="sm"
+                                                                onChange={(e) => topicmanager.setArticlevideoperpage(e.target.value)}
+                                                                placeholder="Perpage" id="perpage" name="perpage">
+                                                                <option value="">Select Option</option>
+                                                                <option value={50}>50</option>
+                                                                <option value={100}>100</option>
+                                                                <option value={150}>150</option>
+                                                                <option value={200}>200</option>
+                                                                <option value={250}>250</option>
+                                                                <option value={300}>300</option>
+
+
+
+
+                                                            </Input>
                                                         </FormGroup>
                                                     </Form>
 
@@ -519,7 +643,7 @@ function Topicsforms(props) {
 
                                                         <PaginationComponent
                                                             totalItems={topicmanager.paginationcount}
-                                                            pageSize={50}
+                                                            pageSize={+topicmanager.articlevideoperpage}
                                                             onSelect={topicmanager.handlePageClickvideo}
                                                             maxPaginationNumbers={5}
                                                             defaultActivePage={1}
@@ -532,29 +656,23 @@ function Topicsforms(props) {
 
                                                     </Pagination>
                                                 </Col>
-                                            </Row>
-                                        </TabPane>
-                                        {/* Tools */}
-                                        <TabPane tabId="tabs5">
+                                                <Col md="12">
+                                                    <FormGroup>
+                                                        <Button outline color="primary" size="sm" onClick={topicmanager.getallvideos} >Refresh</Button>
+                                                        <Button outline color="warning" size="sm" onClick={topicmanager.bulkdeletervideos} >Delete</Button>
+                                                        <Button outline color="info" size="sm" id="Videos" onClick={topicmanager.reviewupdate} >Change Review</Button>
+                                                        <Button outline color="success" size="sm" id="Videos" onClick={topicmanager.statusupdate} >Change Status</Button>
 
-                                            <Row>
-                                                <Col md="12">  
-                                                <FormGroup>
-                                                    
-                                                            <Button outline color="primary" size="sm" onClick={topicmanager.getalltools} >Refresh</Button>
-                                                            <Button outline color="warning" size="sm" onClick={topicmanager.bulkdeletertools} >Delete</Button>
-                                                            <Button outline color="info" size="sm" id="Tools" onClick={topicmanager.reviewupdate} >Change Review</Button>
-                                                            <Button outline color="success" size="sm" id="Tools" onClick={topicmanager.statusupdate} >Change Status</Button>
+                                                    </FormGroup>
+                                                    <Form inline>
 
-                                                        </FormGroup>     
-                                                <Form inline>
-                                                                                                   
 
                                                         <FormGroup className="m-1">
 
                                                             <Label for="isactive">state: {topicmanager.articlevideoisactive}</Label>
                                                             <Input bsSize="sm" type="select" name="isactive" id="isactive"
                                                                 onChange={topicmanager.statetoggle}
+                                                                value={topicmanager.articlevideoisactive}
                                                             >
                                                                 <option value="">Select Option</option>
                                                                 <option value={true}>Active</option>
@@ -570,6 +688,88 @@ function Topicsforms(props) {
                                                             <Label for="isreview"> Review: </Label>
                                                             <Input bsSize="sm" type="select" name="isreview" id="isreview"
                                                                 onChange={topicmanager.viewtoggle}
+                                                                value={topicmanager.articlevideoisview}
+                                                            >
+                                                                <option value="">Select Option</option>
+                                                                <option value={true}>Marked as Reviewed</option>
+                                                                <option value={false}>Not Reviewed</option>
+
+
+
+                                                            </Input>
+
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+                                                            <Label for="channelid">channelid: </Label>
+                                                            <Input bsSize="sm" onChange={topicmanager.sitequery} placeholder="Enter Channelid" id="channelid" name="channelid" />
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+                                                            <Label for="channelid">search query: </Label>
+                                                            <Input bsSize="sm" value={topicmanager.articlevideosearch} onChange={topicmanager.searchquery} placeholder="Enter Query" id="q" name="q" />
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+                                                            <Label for="perpage">Per page: </Label>
+                                                            <Input
+                                                                value={topicmanager.articlevideoperpage}
+                                                                type="select" bsSize="sm"
+                                                                onChange={(e) => topicmanager.setArticlevideoperpage(e.target.value)}
+                                                                placeholder="Perpage" id="perpage" name="perpage">
+                                                                <option value="">Select Option</option>
+                                                                <option value={50}>50</option>
+                                                                <option value={100}>100</option>
+                                                                <option value={150}>150</option>
+                                                                <option value={200}>200</option>
+                                                                <option value={250}>250</option>
+                                                                <option value={300}>300</option>
+
+
+
+
+                                                            </Input>
+                                                        </FormGroup>
+                                                    </Form>
+
+                                                </Col>
+                                            </Row>
+                                        </TabPane>
+                                        {/* Tools */}
+                                        <TabPane tabId="tabs5">
+
+                                            <Row>
+                                                <Col md="12">
+                                                    <FormGroup>
+
+                                                        <Button outline color="primary" size="sm" onClick={topicmanager.getalltools} >Refresh</Button>
+                                                        <Button outline color="warning" size="sm" onClick={topicmanager.bulkdeletertools} >Delete</Button>
+                                                        <Button outline color="info" size="sm" id="Tools" onClick={topicmanager.reviewupdate} >Change Review</Button>
+                                                        <Button outline color="success" size="sm" id="Tools" onClick={topicmanager.statusupdate} >Change Status</Button>
+
+                                                    </FormGroup>
+                                                    <Form inline>
+
+
+                                                        <FormGroup className="m-1">
+
+                                                            <Label for="isactive">state: {topicmanager.articlevideoisactive}</Label>
+                                                            <Input bsSize="sm" type="select" name="isactive" id="isactive"
+                                                                onChange={topicmanager.statetoggle}
+                                                                value={topicmanager.articlevideoisactive}
+                                                            >
+                                                                <option value="">Select Option</option>
+                                                                <option value={true}>Active</option>
+                                                                <option value={false}>Deactivated</option>
+
+
+
+                                                            </Input>
+
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+
+                                                            <Label for="isreview"> Review: </Label>
+                                                            <Input bsSize="sm" type="select" name="isreview" id="isreview"
+                                                                onChange={topicmanager.viewtoggle}
+                                                                value={topicmanager.articlevideoisview}
                                                             >
                                                                 <option value="">Select Option</option>
                                                                 <option value={true}>Marked as Reviewed</option>
@@ -589,8 +789,30 @@ function Topicsforms(props) {
                                                             <Input bsSize="sm" onChange={topicmanager.authorquery} placeholder="Enter authorquery" id="authorquery" name="authorquery" />
                                                         </FormGroup>
                                                         <FormGroup className="m-1">
-                                                        <Label for="q">search query: </Label>
-                                                            <Input bsSize="sm" onChange={topicmanager.searchquery} placeholder="Enter Query" id="q" name="q" />
+                                                            <Label for="q">search query: </Label>
+                                                            <Input bsSize="sm"
+                                                                value={topicmanager.articlevideosearch}
+                                                                onChange={topicmanager.searchquery} placeholder="Enter Query" id="q" name="q" />
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+                                                            <Label for="perpage">Per page: </Label>
+                                                            <Input
+                                                                value={topicmanager.articlevideoperpage}
+                                                                type="select" bsSize="sm"
+                                                                onChange={(e) => topicmanager.setArticlevideoperpage(e.target.value)}
+                                                                placeholder="Perpage" id="perpage" name="perpage">
+                                                                <option value="">Select Option</option>
+                                                                <option value={50}>50</option>
+                                                                <option value={100}>100</option>
+                                                                <option value={150}>150</option>
+                                                                <option value={200}>200</option>
+                                                                <option value={250}>250</option>
+                                                                <option value={300}>300</option>
+
+
+
+
+                                                            </Input>
                                                         </FormGroup>
                                                     </Form>
 
@@ -612,7 +834,7 @@ function Topicsforms(props) {
 
                                                         <PaginationComponent
                                                             totalItems={topicmanager.paginationcount}
-                                                            pageSize={50}
+                                                            pageSize={+topicmanager.articlevideoperpage}
                                                             onSelect={topicmanager.handlePageClicktools}
                                                             maxPaginationNumbers={5}
                                                             defaultActivePage={1}
@@ -624,6 +846,87 @@ function Topicsforms(props) {
 
 
                                                     </Pagination>
+                                                </Col>
+                                                <Col md="12">
+                                                    <FormGroup>
+
+                                                        <Button outline color="primary" size="sm" onClick={topicmanager.getalltools} >Refresh</Button>
+                                                        <Button outline color="warning" size="sm" onClick={topicmanager.bulkdeletertools} >Delete</Button>
+                                                        <Button outline color="info" size="sm" id="Tools" onClick={topicmanager.reviewupdate} >Change Review</Button>
+                                                        <Button outline color="success" size="sm" id="Tools" onClick={topicmanager.statusupdate} >Change Status</Button>
+
+                                                    </FormGroup>
+                                                    <Form inline>
+
+
+                                                        <FormGroup className="m-1">
+
+                                                            <Label for="isactive">state: {topicmanager.articlevideoisactive}</Label>
+                                                            <Input bsSize="sm" type="select" name="isactive" id="isactive"
+                                                                onChange={topicmanager.statetoggle}
+                                                                value={topicmanager.articlevideoisactive}
+                                                            >
+                                                                <option value="">Select Option</option>
+                                                                <option value={true}>Active</option>
+                                                                <option value={false}>Deactivated</option>
+
+
+
+                                                            </Input>
+
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+
+                                                            <Label for="isreview"> Review: </Label>
+                                                            <Input bsSize="sm" type="select" name="isreview" id="isreview"
+                                                                onChange={topicmanager.viewtoggle}
+                                                                value={topicmanager.articlevideoisview}
+                                                            >
+                                                                <option value="">Select Option</option>
+                                                                <option value={true}>Marked as Reviewed</option>
+                                                                <option value={false}>Not Reviewed</option>
+
+
+
+                                                            </Input>
+
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+                                                            <Label for="channelid">website: </Label>
+                                                            <Input bsSize="sm" onChange={topicmanager.sitequery} placeholder="Enter website term" id="channelid" name="channelid" />
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+                                                            <Label for="authorquery">author: </Label>
+                                                            <Input bsSize="sm" onChange={topicmanager.authorquery} placeholder="Enter authorquery" id="authorquery" name="authorquery" />
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+                                                            <Label for="q">search query: </Label>
+                                                            <Input bsSize="sm"
+                                                                value={topicmanager.articlevideosearch}
+                                                                onChange={topicmanager.searchquery} placeholder="Enter Query" id="q" name="q" />
+                                                        </FormGroup>
+                                                        <FormGroup className="m-1">
+                                                            <Label for="perpage">Per page: </Label>
+                                                            <Input
+                                                                value={topicmanager.articlevideoperpage}
+                                                                type="select" bsSize="sm"
+                                                                onChange={(e) => topicmanager.setArticlevideoperpage(e.target.value)}
+                                                                placeholder="Perpage" id="perpage" name="perpage">
+                                                                <option value="">Select Option</option>
+                                                                <option value={50}>50</option>
+                                                                <option value={100}>100</option>
+                                                                <option value={150}>150</option>
+                                                                <option value={200}>200</option>
+                                                                <option value={250}>250</option>
+                                                                <option value={300}>300</option>
+
+
+
+
+                                                            </Input>
+                                                        </FormGroup>
+                                                    </Form>
+
                                                 </Col>
                                             </Row>
                                         </TabPane>
@@ -646,7 +949,7 @@ function Topicsforms(props) {
                     superrefsarticle={9}
 
                 />
-                 <ToolsModel
+                <ToolsModel
                     catmanager={catmanager}
                     topicmanager={topicmanager}
                     superrefsarticle={10}
