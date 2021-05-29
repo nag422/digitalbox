@@ -19,7 +19,8 @@ const TopicsProvider = ({ children }) => {
         multirefiles: "",
         perpage: 50,
         page: 1,
-        start_from: 0
+        start_from: 0,
+        ytubeserachnumber:50
     });
 
     const [feedform, updateFeedform] = useState(Topicsform);
@@ -35,7 +36,9 @@ const TopicsProvider = ({ children }) => {
     const [articlevideostatus, setArticlevideostatus] = useState('checked');
     const [articlevideoisactive, setArticlevideoisactive] = useState('');
     const [articlevideoisview, setArticlevideoisview] = useState('');
-    const [articlevideochannel, setArticlevideochannel] = useState('');        
+    const [articlevideochannel, setArticlevideochannel] = useState('');   
+    const [topicdate,setTopicdate]  = useState('');   
+    const [topicdateend,setTopicdateend] = useState('');
     const [totalresults, setTotalresults] = useState(0);
     const [allarticles, setAllarticles] = useState([]);
     const [articlemodel, setArticlemodel] = useState(false)
@@ -202,6 +205,7 @@ const deletefeeditem = (e) => {
         form_data.append('category', feedform.superref);
         form_data.append('datatype', feedform.iptype);
         form_data.append('feed', feedform.iptextarea);
+        form_data.append('ytubeserachnumber', feedform.ytubeserachnumber);
 
 
         if (feedform.multirefiles) {
@@ -274,6 +278,7 @@ const deletefeeditem = (e) => {
             headers: {
                 'content-type': 'application/json',
                 'X-CSRFToken': getCookie('csrftoken')
+                // 'Authorization': 'Token d23f03d062b5bbc07e01094838d866b6269a99f5'
             }
         }
         await axios.post(url, form_data, config)
@@ -405,7 +410,8 @@ const deletefeeditem = (e) => {
         form_data.append('category', feedform.typeofsubmit);
         form_data.append('index', 1);
         form_data.append('urlid', list);
-        console.log(feedform.typeofsubmit)
+        form_data.append('ytubeserachnumber', feedform.ytubeserachnumber);
+        console.log(feedform)
         
         // Before Ui Elements
         setIsspinner(!isspinner);
@@ -419,6 +425,7 @@ const deletefeeditem = (e) => {
             headers: {
                 'content-type': 'application/json',
                 'X-CSRFToken': getCookie('csrftoken')
+                // 'Authorization': 'Token d23f03d062b5bbc07e01094838d866b6269a99f5'
             }
         }
         await axios.post(url, form_data, config)
@@ -433,9 +440,10 @@ const deletefeeditem = (e) => {
                 // setCategories(prevCategories => [...prevCategories, { id: res.data.indexkey, category: formchangedata.category }])
 
             })
-            .catch(err =>
+            .catch(err =>{
+                setIsspinner(false);
                 tosttrigger(err, 'error')
-
+}
 
             )
         
@@ -501,8 +509,11 @@ const deletefeeditem = (e) => {
                 // setCategories(prevCategories => [...prevCategories, { id: res.data.indexkey, category: formchangedata.category }])
 
             })
-            .catch(err =>
+            .catch(err =>{
+                setIsspinner(!isspinner);
                 tosttrigger(err, 'error')
+            }
+                
 
 
             )
@@ -1484,7 +1495,7 @@ const deletefeeditem = (e) => {
         
         form_data.append('deletelist', list);
         form_data.append('tablename', 'Articles');
-        let url = 'https://app.kiranvoleti.com/ui/admin/bulkdeltereact/';
+        let url = 'https://app.kiranvoleti.com/ui/admin/bulktrashtopics/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -1527,7 +1538,7 @@ const deletefeeditem = (e) => {
 
         form_data.append('deletelist', list);
         form_data.append('tablename', 'Videos');
-        let url = 'https://app.kiranvoleti.com/ui/admin/bulkdeltereact/';
+        let url = 'https://app.kiranvoleti.com/ui/admin/bulktrashtopics/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -1573,7 +1584,7 @@ const deletefeeditem = (e) => {
 
         form_data.append('deletelist', list);
         form_data.append('tablename', 'Tools');
-        let url = 'https://app.kiranvoleti.com/ui/admin/bulkdeltereact/';
+        let url = 'https://app.kiranvoleti.com/ui/admin/bulktrashtopics/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
             headers: {
@@ -1601,6 +1612,44 @@ const deletefeeditem = (e) => {
     }
 
     // End BulkDeleter
+
+    // Exports List
+
+    const exportarticles = async (e) => {
+        let form_data = new FormData();
+        form_data.append('date', topicdate);
+        form_data.append('dateend', topicdateend);        
+        form_data.append('tablename', e.target.id);
+        
+        let url = 'https://app.kiranvoleti.com/ui/admin/exportlist/';
+        const config = {
+            responseType: 'blob',
+            headers: {
+                'content-type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        }
+
+        await axios.post(url, form_data, config)
+            .then(res => {
+
+                tosttrigger(res.data.msg, "success");
+                const url = window.URL.createObjectURL(new Blob([res.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'file.csv'); //or any other extension
+                document.body.appendChild(link);
+                link.click();
+
+            })
+            .catch(err =>
+                tosttrigger("Something Went Wrong !", "error")
+
+            )
+
+    }
+
+    // End Export List
 
 
     // ui Elements
@@ -1668,7 +1717,8 @@ const deletefeeditem = (e) => {
             searchquery, paginationcount, handlePageClick, handlePageClickarticle,
             handlePageClickvideo,deletefeeditem,sitequery,authorquery,setFetchcategory,
             setArticlevideoisactive,setArticlevideoisview,setArticlevideosearch,setArticlevideoauthor,
-            setArticlevideochannel,articlevideoisview,        
+            setArticlevideochannel,articlevideoisview,setTopicdate,exportarticles,
+            setTopicdateend,        
 
 
 

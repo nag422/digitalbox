@@ -8,6 +8,7 @@ import Topicsforms from "views/examples/Topicsforms.js";
 import Lettersubscription from "views/examples/Lettersubscription";
 import Popularlist from "views/examples/Popularlist";
 import Paymentlist from "views/examples/Paymentlist";
+import PaymentRates from "views/examples/PaymentRates";
 
 
 // import Icons from "views/examples/Icons.js";
@@ -81,6 +82,7 @@ var routes = [
     icon: "ni ni-collection text-gray",
     component: Topicsforms,
     layout: "/admin",
+    // displayproperty:"block"
     displayproperty: localStorage.getItem('userrole') !== "superuser" ? (localStorage.getItem('userrole') === "staff"?'block':'none') : 'block'  
   },
   {
@@ -89,6 +91,7 @@ var routes = [
     icon: "ni ni-send text-gray",
     component: Lettersubscription,
     layout: "/admin",
+    // displayproperty:"block",
     displayproperty: localStorage.getItem('userrole') !== "superuser" ? (localStorage.getItem('userrole') === "staff"?'block':'none') : 'block'  
 
   },
@@ -113,6 +116,15 @@ var routes = [
     name: "Payments",
     icon: "ni ni-credit-card text-gray",
     component: Paymentlist,
+    layout: "/admin",
+    displayproperty: localStorage.getItem('userrole') !== "superuser" ? 'none' : 'block'  
+  }
+  ,
+  {
+    path: "/paymentplans",
+    name: "PaymentPlans",
+    icon: "ni ni-credit-card text-gray",
+    component: PaymentRates,
     layout: "/admin",
     displayproperty: localStorage.getItem('userrole') !== "superuser" ? 'none' : 'block'  
   }

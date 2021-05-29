@@ -19,17 +19,20 @@ ReactDOM.render(
     <TopicsProvider>
   <BrowserRouter>
     <Switch>
-    <Route exact path="/admin/categories/:token" render={props => <AdminLayout {...props} />} />
-    <Route exact path="/admin/manage/:token" render={props => <AdminLayout {...props} />} />
-    <Route exact path="/admin/users" render={props => <AdminLayout {...props} />} />
-    <Route exact path="/admin/tags" render={props => <AdminLayout {...props} />} />
-    <Route exact path="/admin/popularlist" render={props => <AdminLayout {...props} />} />
-    <Route exact path="/admin/payments" render={props => <AdminLayout {...props} />} />
-    <Route exact path="/admin/index" render={props => <AdminLayoutdash {...props} />} />
-      
+
+      <Route exact path="/admin/categories/:token" render={props => <AdminLayout {...props} />} />
+      <Route exact path="/admin/manage/:token" render={props => <AdminLayout {...props} />} />
+      <Route exact path="/admin/users" render={props => <AdminLayout {...props} />} />
+      <Route exact path="/admin/tags" render={props => <AdminLayout {...props} />} />
+      <Route exact path="/admin/popularlist" render={props => <AdminLayout {...props} />} />
+      <Route exact path="/admin/payments" render={props => <AdminLayout {...props} />} />
+      <Route exact path="/admin/paymentplans" render={props => <AdminLayout {...props} />} />
+      <Route exact path="/admin/index" render={props => <AdminLayoutdash {...props} />} />
+        
       <Route path="/auth" render={props => <AuthLayout {...props} />} />
       <Route exact path="/ui/admin" render={props => <AdminLayoutdash {...props} />} />      
       <Redirect from="/" to="/ui/admin" />
+      
     </Switch>
   </BrowserRouter>
   </TopicsProvider>

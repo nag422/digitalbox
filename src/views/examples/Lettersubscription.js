@@ -37,13 +37,22 @@ const Lettersubscription = () => {
     const [bannerlink, setBannerlink] = useState("");
     const [subject, setSubject] = useState("");
     const [datatype, setDatatype] = useState("articles");
+
+    const [articletext, setArticletext] = useState("");
+    const [videotext, setVideotext] = useState("");
+    const [tooltext, setTooltext] = useState("");
+    
     const [pagenumber, setPagenumber] = useState(1);
     const [totalcount, setTotalcount] = useState(1);
     const [subvideos, setSubvideos] = useState([]);
     const [multirefiles, setMultirefiles] = useState([]);
     const [list, setList] = useState([]);
     const [videolist, setVideolist] = useState([]);
-    const [toollist, setToollist] = useState([]);    
+    const [toollist, setToollist] = useState([]);   
+
+
+
+
     const [hasmore,setHasmore] = useState(false);
     const [stateallchecked, setStateallchecked] = useState(false);
     
@@ -60,6 +69,7 @@ const Lettersubscription = () => {
                 // setPagenumber(prevPagenumber => prevPagenumber + 1)           
                 handlePageClickvideo(pagenumber);
             }
+            
         })
         if (node) observer.current.observe(node)
     },[])
@@ -75,7 +85,7 @@ const Lettersubscription = () => {
         // form_data.append('phone', editingform.phone);
         // form_data.append('datacategory', editingform.datacategory);
 
-        let url = 'https://app.kiranvoleti.com/daily';
+        let url = 'https://app.kiranvoleti.com/daily/';
         // console.log(editingform)
         // return
 
@@ -127,7 +137,7 @@ const Lettersubscription = () => {
         // form_data.append('phone', editingform.phone);
         // form_data.append('datacategory', editingform.datacategory);
 
-        let url = 'https://app.kiranvoleti.com/daily';
+        let url = 'https://app.kiranvoleti.com/daily/';
         // console.log(editingform)
         // return
 
@@ -192,7 +202,7 @@ const Lettersubscription = () => {
         // Before Ui Elements
         // Backend Submission
 
-        let url = "https://app.kiranvoleti.com/daily";
+        let url = "https://app.kiranvoleti.com/daily/";
         // let url = 'http://localhost:8099/fetchfeeds';
         const config = {
             headers: {
@@ -342,6 +352,10 @@ const Lettersubscription = () => {
         form_data.append('datatype', datatype);
         form_data.append('bannerlink', bannerlink);
 
+        form_data.append('articletext', articletext);
+        form_data.append('videotext', videotext);
+        form_data.append('tooltext', tooltext);
+
         // for (const key of Object.keys(multirefiles)) {
         //     form_data.append('uploadfile', multirefiles[key])
         // }
@@ -355,7 +369,7 @@ const Lettersubscription = () => {
         // Before Ui Elements
         // Backend Submission
 
-        let url = "https://app.kiranvoleti.com/dailysubscribe";
+        let url = "https://app.kiranvoleti.com/dailysubscribe/";
         // let url = 'http://localhost:8099/fetchfeeds';
         const config = {
             headers: {
@@ -585,11 +599,34 @@ const Lettersubscription = () => {
                             </FormGroup>
                             <FormGroup className="mb-3">
                                 <Label for="title">Text</Label>
-                                <Input type="text" name="title" id="title"
+                                <Input type="textarea" name="title" id="title"
                                     onChange={(e) => setTitle(e.target.value)}
                                 />
 
                             </FormGroup>
+                            {/* Fortext news */}
+                            <FormGroup className="mb-3">
+                                <Label for="articletext">Articletext</Label>
+                                <Input type="textarea" name="articletext" id="articletext"
+                                    onChange={(e) => setTitle(e.target.value)}
+                                />
+
+                            </FormGroup>
+                            <FormGroup className="mb-3">
+                                <Label for="videotext">Videotext</Label>
+                                <Input type="textarea" name="videotext" id="videotext"
+                                    onChange={(e) => setTitle(e.target.value)}
+                                />
+
+                            </FormGroup>
+                            <FormGroup className="mb-3">
+                                <Label for="tooltext">Toolstext</Label>
+                                <Input type="textarea" name="tooltext" id="tooltext"
+                                    onChange={(e) => setTitle(e.target.value)}
+                                />
+
+                            </FormGroup>
+                            {/* Fortext news */}
                             <FormGroup className="mb-3">
                                 <Label for="multirefiles">Upload Banner</Label>
                                 <InputGroup className="input-group-alternative">

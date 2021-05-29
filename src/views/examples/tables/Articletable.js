@@ -44,12 +44,9 @@ function Articletable(props) {
                         </th>
                         <th scope="col">Feed Link</th>
                         <th scope="col">Category</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">is_Active</th>
-                        <th scope="col">is_Fetched</th>
-                        <th scope="col">parent_id</th>
+                        
                         <th scope="col">pubdate</th>
-                        <th scope="col">lastmodifieddate</th>
+                        
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -85,10 +82,10 @@ function Articletable(props) {
                             </th>
                             <td><a href={row.feedlist} target="_blank" rel="noopener noreferrer"><div style={{width:'200px',wordWrap: 'break-word',whiteSpace:"pre-wrap"}}>{row.feedlist.substring(0, 60)}</div></a></td>
                             <td>{row.category}</td>                            
-                            <td>{row.typeofsubmit}</td>
+                            {/* <td>{row.typeofsubmit}</td> */}
                                                           
 
-                            <td id={row._id}>
+                            {/* <td id={row._id}>
                             <label className="custom-toggle">
                             {row.isactive ? 
                             
@@ -103,7 +100,7 @@ function Articletable(props) {
                             }
                             <span className="custom-toggle-slider rounded-circle" />
                             </label>
-                            </td>
+                            </td> */}
                                 
 
 
@@ -111,10 +108,10 @@ function Articletable(props) {
 
 
                             {/* <td>{row.isactive ? "Active" : "Deactivate"}</td> */}
-                            <td>{row.isfetched  ? "Fetched" : "Not Fetched"}</td>                            
-                            <td>{row.parent_id ? row.parent_id : "its is parent"}</td>
+                            {/* <td>{row.isfetched  ? "Fetched" : "Not Fetched"}</td>                             */}
+                            {/* <td>{row.parent_id ? row.parent_id : "its is parent"}</td> */}
                             <td>{row.pubdate}</td>
-                            <td>{row.lastmodified}</td>
+                            {/* <td>{row.lastmodified}</td> */}
 
 
 

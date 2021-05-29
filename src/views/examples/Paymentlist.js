@@ -197,7 +197,9 @@ const deletepayment = async (e) => {
 
    form_data.append('deletelist', list);
    form_data.append('tablename', 'payments');
-   let url = 'https://app.kiranvoleti.com/ui/bulkdeltereact/';
+
+   let url = 'https://app.kiranvoleti.com/ui/admin/bulkdeltereact/';
+
    // let url = 'https://jsonplaceholder.typicode.com/todos';
    const config = {
        headers: {

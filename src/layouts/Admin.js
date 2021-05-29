@@ -39,7 +39,7 @@ class Admin extends React.Component {
   };
     
      axios.get(authurl,config).then(res=>{
-       console.log(res.data)
+       
             if (res.data.issuperuser){
 
                 localStorage.setItem('userrole', 'superuser');     

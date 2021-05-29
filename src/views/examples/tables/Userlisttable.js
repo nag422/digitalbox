@@ -29,6 +29,8 @@ const Userlisttable = (props) => {
     const [alertmsgcolor, setAlertmsgcolor] = useState("info");
     const [alertmsg, setAlertmsg] = useState("");
     const [userstate, setUserstate] = useState([]);
+    const [topicdate, setTopicdate] = useState('');
+    const [topicdateend, setTopicdateend] = useState('');
 
 
 
@@ -41,14 +43,14 @@ const Userlisttable = (props) => {
         password1: "",
         phone: "",
         capability: "",
-        datacategory:""
+        datacategory: ""
     });
 
     const initialeditingform = Object.freeze({
         username: "",
         email: "",
         phone: "",
-        datacategory:"",
+        datacategory: "",
         _id: "",
         capability: "",
     });
@@ -89,12 +91,12 @@ const Userlisttable = (props) => {
     const optionhandleChange = (e) => {
 
         var options = e.target.options;
-            var value = [];
-            for (var i = 0, l = options.length; i < l; i++) {
-              if (options[i].selected) {
+        var value = [];
+        for (var i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
                 value.push(options[i].value);
-              }
             }
+        }
 
         updateEditingform({
             ...editingform,
@@ -104,22 +106,22 @@ const Userlisttable = (props) => {
         });
     };
 
-    
+
 
     const ehandleSubmit = (e) => {
         e.preventDefault();
-        
-        let form_data = new FormData();        
 
-        form_data.append('email', editingform.email);        
+        let form_data = new FormData();
+
+        form_data.append('email', editingform.email);
         form_data.append('id', editingform._id);
         form_data.append('phone', editingform.phone);
         form_data.append('datacategory', editingform.datacategory);
-        
+
         let url = 'https://app.kiranvoleti.com/ui/admin/edituser/';
         // console.log(editingform)
         // return
-        
+
         const config = {
             headers: {
                 'content-type': 'application/json',
@@ -130,11 +132,11 @@ const Userlisttable = (props) => {
         axios.post(url, form_data, config)
             .then(res => {
                 setEditModal(false)
-                props.fetchusers()              
-                
+                props.fetchusers()
+
 
             })
-            .catch(err =>{
+            .catch(err => {
                 setEditModal(false)
                 console.log(err)
             }
@@ -144,19 +146,19 @@ const Userlisttable = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         // let form_data = new FormData();
-        
+
         props.setIsalert(!props.isalert)
         setAlertmsg("plase check your password");
         setAlertmsgcolor('danger');
 
-        
+
         let form_data = new FormData();
         form_data.append('first_name', formchangedata.username);
         form_data.append('pwd', formchangedata.password);
         form_data.append('email', formchangedata.email);
         form_data.append('userrole', formchangedata.capability);
         console.log(formchangedata)
-        
+
         let url = 'https://app.kiranvoleti.com/ui/admin/saveuser/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
@@ -167,16 +169,16 @@ const Userlisttable = (props) => {
         }
         axios.post(url, form_data, config)
             .then(res => {
-                
+
                 toggleModal()
                 props.fetchusers()
 
             })
-            .catch(err =>{
+            .catch(err => {
                 toggleModal()
                 console.log(err)
             }
-                
+
             )
         // Object.entries(formData).map(entry => { 
         //     // let key = entry[0]; 
@@ -188,13 +190,13 @@ const Userlisttable = (props) => {
         // ... submit to API or something
     };
     // form state
-    const statuschange = (e)=>{
-        
-        
+    const statuschange = (e) => {
+
+
         let form_data = new FormData();
         form_data.append('user_id', e.target.id);
         form_data.append('is_active', e.target.checked);
-        
+
         let url = 'https://app.kiranvoleti.com/ui/admin/getuserupdate/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
@@ -206,25 +208,25 @@ const Userlisttable = (props) => {
 
         axios.post(url, form_data, config)
             .then(res => {
-                
-                tosttrigger("Successfully Status Changed !","success");
+
+                tosttrigger("Successfully Status Changed !", "success");
 
             })
             .catch(err =>
-                tosttrigger("Something Went Wrong !","error")
-                
-            )    
+                tosttrigger("Something Went Wrong !", "error")
+
+            )
 
     }
 
-    const adminstatus = (e)=>{
-        
-        
+    const adminstatus = (e) => {
+
+
         let form_data = new FormData();
         form_data.append('user_id', e.target.id);
         form_data.append('capability', e.target.value);
-        console.log(e.target.id,e.target.value)
-        
+        console.log(e.target.id, e.target.value)
+
         let url = 'https://app.kiranvoleti.com/ui/admin/getuserupdateadmin/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
@@ -236,27 +238,27 @@ const Userlisttable = (props) => {
 
         axios.post(url, form_data, config)
             .then(res => {
-                
-                tosttrigger("Successfully Status Changed !","success");
+
+                tosttrigger("Successfully Status Changed !", "success");
                 props.fetchusers()
 
             })
             .catch(err =>
-                tosttrigger("Something Went Wrong !","error")
-                
-            )    
+                tosttrigger("Something Went Wrong !", "error")
+
+            )
 
     }
     // Subscribe change
 
-    const subscribestatechange = (e)=>{
-        
-        
+    const subscribestatechange = (e) => {
+
+
         let form_data = new FormData();
         form_data.append('user_id', e.target.id);
         form_data.append('capability', e.target.value);
-        console.log(e.target.id,e.target.value)
-        
+        console.log(e.target.id, e.target.value)
+
         let url = 'https://app.kiranvoleti.com/ui/admin/updatesubscribestatus/';
         // let url = 'https://jsonplaceholder.typicode.com/todos';
         const config = {
@@ -268,40 +270,112 @@ const Userlisttable = (props) => {
 
         axios.post(url, form_data, config)
             .then(res => {
-                
-                tosttrigger("Successfully Status Changed !","success");
+
+                tosttrigger("Successfully Status Changed !", "success");
                 props.fetchusers()
 
             })
             .catch(err =>
-                tosttrigger("Something Went Wrong !","error")
-                
-            )    
+                tosttrigger("Something Went Wrong !", "error")
+
+            )
 
     }
+
+    // Subscribe change
+
+    const trendsstatechange = (e) => {
+
+
+        let form_data = new FormData();
+        form_data.append('user_id', e.target.id);
+        form_data.append('capability', e.target.value);
+        console.log(e.target.id, e.target.value)
+
+        let url = 'https://app.kiranvoleti.com/ui/admin/updatetrendstatus/';
+        // let url = 'https://jsonplaceholder.typicode.com/todos';
+        const config = {
+            headers: {
+                'content-type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        }
+
+        axios.post(url, form_data, config)
+            .then(res => {
+
+                tosttrigger("Successfully Assigned Changed !", "success");
+                props.fetchusers()
+
+            })
+            .catch(err =>
+                tosttrigger("Something Went Wrong !", "error")
+
+            )
+
+    }
+
+    // Exports List
+
+    const exportusers = async (e) => {
+        let form_data = new FormData();
+        form_data.append('date', topicdate);
+        form_data.append('dateend', topicdateend);
+        form_data.append('tablename', e.target.id);
+
+        let url = 'https://app.kiranvoleti.com/ui/admin/exportlist/';
+        const config = {
+            responseType: 'blob',
+            headers: {
+                'content-type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+
+            }
+        }
+
+        await axios.post(url, form_data, config)
+            .then(res => {
+
+                tosttrigger(res.data.msg, "success");
+                const url = window.URL.createObjectURL(new Blob([res.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'file.csv'); //or any other extension
+                document.body.appendChild(link);
+                link.click();
+
+            })
+            .catch(err =>
+                tosttrigger("Something Went Wrong !", "error")
+
+            )
+
+    }
+
+    // End Export List
 
     // Subscribe change end
     const getCookie = (name) => {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
-          const cookies = document.cookie.split(';');
-          for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-              break;
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
             }
-          }
         }
         return cookieValue;
-      }
+    }
     const toggleModal = () => {
         setExampleModal(!exampleModal);
         props.setIsalert(false)
     };
     const toggleeditModal = async (e) => {
-        
+
         const initialeditingform = {
             username: e.target.dataset.username,
             email: e.target.dataset.email,
@@ -316,7 +390,7 @@ const Userlisttable = (props) => {
 
     // Checkbox
     const handleAllChecked = (event) => {
-        
+
         var allelm = document.querySelectorAll("input[name=childbox]");
         if (event.target.checked) {
             allelm.forEach(elm => {
@@ -347,13 +421,13 @@ const Userlisttable = (props) => {
             let nowobj = userstateaction.filter(ischeckf)
             setUserstate([...nowobj]);
         }
-        
+
     }
     // end checkbox
 
-    
-    function tosttrigger(msg,status){
-        if(status === "success"){
+
+    function tosttrigger(msg, status) {
+        if (status === "success") {
 
             toast.success(msg, {
                 position: "top-right",
@@ -365,24 +439,24 @@ const Userlisttable = (props) => {
                 progress: undefined,
             });
 
-            }else{
-                toast.error(msg, {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+        } else {
+            toast.error(msg, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
 
-}
-        
+        }
+
     }
     // function hideSwalert() {
     //     setSwlert("");
     // }
-    
+
 
     return (
 
@@ -402,6 +476,31 @@ const Userlisttable = (props) => {
             />
             {/* Button trigger modal */}
             <Row className="mr-2 mb-1">
+                <Col md="5">
+                    <FormGroup className="mt-2">
+
+                        <Input type="date" onChange={(e) => setTopicdate(e.target.value)} />
+
+
+                    </FormGroup>
+
+                </Col>
+                <Col md="5">
+                    <FormGroup className="mt-2">
+                        <Input type="date" onChange={(e) => setTopicdateend(e.target.value)} />
+                    </FormGroup>
+                </Col>
+                <Col md="2">
+                    <Button className="mt-2" color="default" style={{ borderRadius: '2px' }}
+                        size="md" type="button"
+                        id="backend_useraccount"
+                        onClick={exportusers}
+
+                    >
+                        Export
+                </Button>
+                    {/* Fetched Results: {topicmanager.totalresults} of Total {topicmanager.collectioncountarticle} */}
+                </Col>
                 <Col md="12" >
                     <Button
                         size="sm"
@@ -423,10 +522,12 @@ const Userlisttable = (props) => {
                     </Button>
                 </Col>
 
+
+
             </Row>
             Total Records: {props.totalpages}
             <Table className="align-items-center table-flush" responsive>
-                
+
                 <thead className="thead-light">
                     <tr>
                         <th>
@@ -449,7 +550,8 @@ const Userlisttable = (props) => {
                         <th scope="col">Mobile</th>
                         <th scope="col">Status</th>
                         <th scope="col">Capability</th>
-                        <th scope="col">Permission</th>
+                        <th scope="col">Tier</th>
+                        <th scope="col">Trends</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -491,57 +593,65 @@ const Userlisttable = (props) => {
                                     </Media>
                                 </Media>
                             </th>
-                            
+
                             <td>{row.email}</td>
-                            <td>{row.newsletter ? 'Subscribed':'Not Subscribed'}
-                            
-                            <select className="ml-2" id={row.email} name="subscribestate" onChange={subscribestatechange}>
+                            <td>{row.newsletter ? 'Subscribed' : 'Not Subscribed'}
+
+                                <select className="ml-2" id={row.email} name="subscribestate" onChange={subscribestatechange}>
                                     <option value="y">--is_subscribed--</option>
                                     <option value="y">Subscribe</option>
                                     <option value="n">Unsubscribe</option>
                                 </select>
                             </td>
-                            
+
 
 
                             <td>{row.phone}</td>
-                            
-                                
-                                <td id={row._id}>
+
+
+                            <td id={row._id}>
                                 <label className="custom-toggle">
-                                {row.is_active ? 
-                                
-                                <input id={row._id} onChange={statuschange} defaultChecked type="checkbox" />
-                                
-                                : 
-                                
-                                
-                                <input id={row._id} onChange={statuschange} type="checkbox" />
-                                
-                                
-                                }
-                                <span className="custom-toggle-slider rounded-circle" />
-                              </label>
-                                </td>
-                                <td>All</td>
-                                <td>
-                                {row.is_superuser ? "Admin" : row.is_staff ? "Staff": "User"}
+                                    {row.is_active ?
+
+                                        <input id={row._id} onChange={statuschange} defaultChecked type="checkbox" />
+
+                                        :
+
+
+                                        <input id={row._id} onChange={statuschange} type="checkbox" />
+
+
+                                    }
+                                    <span className="custom-toggle-slider rounded-circle" />
+                                </label>
+                            </td>
+
+                            <td>
+                                {row.is_superuser ? "Admin" : row.is_staff ? "Staff" : "User"}
                                 <select className="ml-2" id={row._id} name="capability" onChange={adminstatus}>
                                     <option value="u">--Role--</option>
                                     <option value="u">User</option>
                                     <option value="s">Staff</option>
                                     <option value="a">Admin</option>
                                 </select>
-                                
+
                             </td>
-                                
-         
-
-                            
+                            <td>{(row.tier)}</td>
 
 
-                           
-                            
+                            <td>{row.trends ? 'Subscribed' : 'Not Subscribed'}
+
+                            <select className="ml-2" id={row.email} name="trendstate" onChange={trendsstatechange}>
+                                <option value="y">--is_subscribed--</option>
+                                <option value="y">Allow</option>
+                                <option value="n">Deny</option>
+                            </select>
+                            </td>
+
+
+
+
+
 
                             <td>
 
@@ -553,14 +663,14 @@ const Userlisttable = (props) => {
                                 <Button color="info" size="sm" type="button"
                                     data-username={row.username}
                                     data-id={row.id}
-                                    data-email={row.email}                                
+                                    data-email={row.email}
                                     onClick={toggleeditModal}
                                 >
-                                    <i className="fas fa-pen"                                    
-                                    data-username={row.username}
-                                    data-id={row.id}
-                                    data-email={row.email}
-                                    aria-hidden="true"></i>
+                                    <i className="fas fa-pen"
+                                        data-username={row.username}
+                                        data-id={row.id}
+                                        data-email={row.email}
+                                        aria-hidden="true"></i>
                                 </Button>
 
                             </td>
@@ -571,7 +681,7 @@ const Userlisttable = (props) => {
 
                 </tbody>
             </Table>
-            
+
 
 
 
@@ -624,7 +734,7 @@ const Userlisttable = (props) => {
                                 <Input onChange={handleChange} placeholder="Email" id="email" name="email" type="email" />
                             </InputGroup>
                         </FormGroup>
-                        
+
                         <FormGroup>
                             <InputGroup className="input-group-alternative">
                                 <InputGroupAddon addonType="prepend">
@@ -635,20 +745,20 @@ const Userlisttable = (props) => {
                                 <Input onChange={handleChange} placeholder="Password" id="password" name="password" type="password" />
                             </InputGroup>
                         </FormGroup>
-                    
+
                         <FormGroup className="mb-3">
                             <InputGroup className="input-group-alternative">
                                 <InputGroupAddon addonType="prepend">
                                     <InputGroupText>
                                         <i className="fa fa-bars" />
                                     </InputGroupText>
-                                </InputGroupAddon>                                
-                                <Input onChange={handleChange}  
-                                        id="capability" name="capability" type="select">
-                                        <option>Select Option</option>                                        
-                                        <option value="u">User</option>
-                                        <option value="s">Staff</option>
-                                        <option value="a">Admin</option>
+                                </InputGroupAddon>
+                                <Input onChange={handleChange}
+                                    id="capability" name="capability" type="select">
+                                    <option>Select Option</option>
+                                    <option value="u">User</option>
+                                    <option value="s">Staff</option>
+                                    <option value="a">Admin</option>
 
                                 </Input>
                             </InputGroup>
@@ -703,19 +813,7 @@ const Userlisttable = (props) => {
                     }
 
                     <Form role="form" onSubmit={ehandleSubmit}>
-                        <FormGroup className="mb-3">
-                            <InputGroup className="input-group-alternative">
-                                <InputGroupAddon addonType="prepend">
-                                    <InputGroupText>
-                                        <i className="fas fa-user" />
-                                    </InputGroupText>
-                                </InputGroupAddon>
-                                <Input onChange={ehandleChange}
-                                    value={editingform.username}
-                                    placeholder="Username" id="username" name="username"
-                                    type="text" />
-                            </InputGroup>
-                        </FormGroup>
+
                         <FormGroup className="mb-3">
                             <InputGroup className="input-group-alternative">
                                 <InputGroupAddon addonType="prepend">
@@ -735,7 +833,7 @@ const Userlisttable = (props) => {
                                         <i className="fa fa-phone" />
                                     </InputGroupText>
                                 </InputGroupAddon>
-                                
+
                                 <Input onChange={ehandleChange}
                                     value={editingform.phone}
                                     placeholder="Phone" id="phone" name="phone" type="text" />
@@ -747,19 +845,19 @@ const Userlisttable = (props) => {
                                     <InputGroupText>
                                         <i className="fa fa-bars" />
                                     </InputGroupText>
-                                </InputGroupAddon>                                
-                                <Input onChange={optionhandleChange} multiple 
-                                     id="datacategory" name="datacategory" type="select">
-                                        {/* <option>Select Option</option> */}
-                                        <option value="all">All</option>
-                                        <option value="articles">Articles</option>
-                                        <option value="videos">Videos</option>
-                                        <option value="tools">Tools</option>
+                                </InputGroupAddon>
+                                <Input onChange={optionhandleChange}
+                                    id="datacategory" name="datacategory" type="select">
+                                    {/* <option>Select Option</option> */}
+                                    <option value="all">All</option>
+                                    <option value="1">Tier1</option>
+                                    <option value="2">Tier2</option>
+                                    <option value="3">Tier3</option>
 
                                 </Input>
                             </InputGroup>
                         </FormGroup>
-                        
+
 
 
                         <div className="modal-footer">

@@ -37,6 +37,8 @@ import Videoarticletable from './tables/Videoarticletable';
 import Articlevideomodel from './models/Articlevideomodel';
 import Videoarticlemodel from './models/Videoarticlemodel';
 import ToolsModel from './models/ToolsModel';
+import InputGroupAddon from 'reactstrap/lib/InputGroupAddon';
+import InputGroupText from 'reactstrap/lib/InputGroupText';
 
 function Topicsforms(props) {
 
@@ -209,6 +211,20 @@ function Topicsforms(props) {
 
                                                             </Input>
                                                         </FormGroup>
+
+                                                        <FormGroup className="mb-3">
+                                                            <Label for="ytubeserachnumber">Select No.of Searches</Label>
+                                                            <Input type="select" name="ytubeserachnumber" id="ytubeserachnumber"
+                                                                onChange={topicmanager.rhandleChange}
+                                                            >
+                                                                <option value="50">50</option>
+                                                                <option value="100">100</option>
+                                                                <option value="200">200</option>
+                                                                <option value="300">300</option>
+
+                                                            </Input>
+                                                        </FormGroup>
+
                                                         {topicmanager.feedform.iptype === 'multiple' ?
                                                             <FormGroup>
                                                                 <Input
@@ -261,6 +277,21 @@ function Topicsforms(props) {
                                                         :
                                                         null
                                                     }
+                                                    {topicmanager.feedform.typeofsubmit === "username" ?
+
+                                                        <Button outline color="danger" size="sm" onClick={topicmanager.sendchannelfetch} >Fetch Video Username</Button>
+
+                                                        :
+                                                        null
+                                                    }
+
+                                                    {topicmanager.feedform.typeofsubmit === "keyword" ?
+
+                                                        <Button outline color="danger" size="sm" onClick={topicmanager.sendchannelfetch} >Fetch Video Keywords</Button>
+
+                                                        :
+                                                        null
+                                                    }
                                                     {/* <Button color="secondary" onClick={topicmanager.delpin} >Delete</Button> */}
 
 
@@ -271,25 +302,40 @@ function Topicsforms(props) {
                                                             onChange={topicmanager.rhandleChange}
                                                         >
                                                             <option>Select Option</option>
-                                                            <option value="">---------Parent---------</option>
                                                             <option value="feeds">Feeds (text data)</option>
-                                                            <option value="googlenewsfeeds">Googlenewsfeeds (text data)</option>
+                                                            {/* <option value="googlenewsfeeds">Googlenewsfeeds (text data)</option> */}
                                                             <option value="links">Links (text data)</option>
                                                             <option value="channel">Channel ID(video data)</option>
-                                                            <option value="username">Channel name(video data)</option>
-                                                            <option value="video">Video (video data)</option>
-                                                            <option value="">---------Children---------</option>
+                                                            <option value="username">Channel Username(video data)</option>
+                                                            <option value="keyword">Video Search keyword(video data)</option>
+                                                            {/* <option value="video">Video (video data)</option> */}
+                                                            {/* <option value="">---------Children---------</option>
 
                                                             <option value="genfromgooglefeeds">Gen from Googlefeeds (text data (child))</option>
                                                             <option value="genfromfeeds">Gen from feeds (text data (child))</option>
                                                             <option value="genfromchannel">Gen from channels (video data (child))</option>
                                                             <option value="links">Links (text data (child))</option>
-                                                            <option value="video">Video (video data (child))</option>
+                                                            <option value="video">Video (video data (child))</option> */}
 
 
 
                                                         </Input>
                                                     </FormGroup>
+                                                </Col>
+                                                <Col md="6">
+                                                <FormGroup className="mb-3">
+                                                            <Label for="ytubeserachnumber">Select No.of Searches</Label>
+                                                            <Input type="select" name="ytubeserachnumber" id="ytubeserachnumber"
+                                                                onChange={topicmanager.rhandleChange}
+                                                            >
+                                                                <option value="50">50</option>
+                                                                <option value="100">100</option>
+                                                                <option value="200">200</option>
+                                                                <option value="300">300</option>
+
+                                                            </Input>
+                                                        </FormGroup>
+
                                                 </Col>
                                                 <hr />
                                                 {/* <Col md='6'>
@@ -350,22 +396,27 @@ function Topicsforms(props) {
                                         <TabPane tabId="tabs3">
 
                                             <Row>
-                                                <Col md="12">
+                                                <Col md="12" sm="12">
                                                     <FormGroup>
-                                                        <Button outline color="primary" size="sm" onClick={topicmanager.getallarticles} >Refresh</Button>
-                                                        <Button outline color="warning" size="sm" onClick={topicmanager.bulkdeleter} >Delete</Button>
-                                                        <Button outline color="info" size="sm" id="Articles" onClick={topicmanager.reviewupdate} >Change Review</Button>
-                                                        <Button outline color="success" size="sm" id="Articles" onClick={topicmanager.statusupdate} >Change Status</Button>
-
+                                                        <Button outline style={{ borderRadius: '2px' }} color="primary" size="sm" onClick={topicmanager.getallarticles} >Refresh List</Button>
+                                                        <Button outline style={{ borderRadius: '2px' }} color="primary" size="sm" onClick={topicmanager.bulkdeleter} >Delete List</Button>
+                                                        <Button outline style={{ borderRadius: '2px' }} color="primary" size="sm" id="Articles" onClick={topicmanager.reviewupdate} >Change Review</Button>
+                                                        <Button outline style={{ borderRadius: '2px' }} color="primary" size="sm" id="Articles" onClick={topicmanager.statusupdate} >Change Status</Button>
                                                     </FormGroup>
+                                                </Col>
+
+                                            </Row>
+                                            <Row>
+                                                <Col md='12'>
                                                     <Form inline>
 
                                                         <FormGroup className="m-1">
 
-                                                            <Label for="isactive">state: {topicmanager.articlevideoisactive}</Label>
-                                                            <Input bsSize="sm" type="select" name="isactive" id="isactive"
+                                                            <Label for="isactive" className="mr-2">state: {topicmanager.articlevideoisactive}</Label>
+                                                            <Input style={{ borderRadius: '2px' }} bsSize="sm" type="select" name="isactive" id="isactive"
                                                                 onChange={topicmanager.statetoggle}
                                                                 value={topicmanager.articlevideoisactive}
+                                                                className="form-control-alternative"
                                                             >
                                                                 <option value="">Select Option</option>
                                                                 <option value={true}>Active</option>
@@ -378,10 +429,11 @@ function Topicsforms(props) {
                                                         </FormGroup>
                                                         <FormGroup className="m-1">
 
-                                                            <Label for="isreview"> Review: </Label>
-                                                            <Input bsSize="sm" type="select" name="isreview" id="isreview"
+                                                            <Label for="isreview" className="mr-2"> Review: </Label>
+                                                            <Input style={{ borderRadius: '2px' }} bsSize="sm" type="select" name="isreview" id="isreview"
                                                                 value={topicmanager.articlevideoisview}
                                                                 onChange={topicmanager.viewtoggle}
+                                                                className="form-control-alternative"
                                                             >
                                                                 <option value="">Select Option</option>
                                                                 <option value={true}>Marked as Reviewed</option>
@@ -393,24 +445,26 @@ function Topicsforms(props) {
 
                                                         </FormGroup>
                                                         <FormGroup className="m-1">
-                                                            <Label for="channelid">website: </Label>
-                                                            <Input bsSize="sm"
+                                                            <Label for="channelid" className="mr-2">website: </Label>
+                                                            <Input style={{ borderRadius: '2px' }} bsSize="sm" className="form-control-alternative"
                                                                 onChange={topicmanager.sitequery}
                                                                 placeholder="Enter website term"
                                                                 id="channelid" name="channelid" />
                                                         </FormGroup>
                                                         <FormGroup className="m-1">
-                                                            <Label for="authorquery">author: </Label>
-                                                            <Input bsSize="sm" onChange={topicmanager.authorquery} placeholder="Enter authorquery" id="authorquery" name="authorquery" />
+                                                            <Label for="authorquery" className="mr-2">author: </Label>
+                                                            <Input style={{ borderRadius: '2px' }} className="form-control-alternative" bsSize="sm" onChange={topicmanager.authorquery} placeholder="Enter authorquery" id="authorquery" name="authorquery" />
                                                         </FormGroup>
                                                         <FormGroup className="m-1">
-                                                            <Label for="q">search query: </Label>
-                                                            <Input bsSize="sm" value={topicmanager.articlevideosearch} onChange={topicmanager.searchquery} placeholder="Enter Query" id="q" name="q" />
+                                                            <Label for="q" className="mr-2">search query: </Label>
+                                                            <Input style={{ borderRadius: '2px' }} className="form-control-alternative" bsSize="sm" value={topicmanager.articlevideosearch} onChange={topicmanager.searchquery} placeholder="Enter Query" id="q" name="q" />
                                                         </FormGroup>
                                                         <FormGroup className="m-1">
-                                                            <Label for="perpage">Per page: </Label>
+                                                            <Label for="perpage" className="mr-2">Per page: </Label>
 
                                                             <Input
+                                                                style={{ borderRadius: '2px' }}
+                                                                className="form-control-alternative"
                                                                 value={topicmanager.articlevideoperpage}
                                                                 type="select" bsSize="sm"
                                                                 onChange={(e) => topicmanager.setArticlevideoperpage(e.target.value)}
@@ -428,18 +482,46 @@ function Topicsforms(props) {
 
                                                             </Input>
                                                         </FormGroup>
+
                                                     </Form>
 
                                                 </Col>
-                                                <Col md="4">
-                                                    Fetched Results: {topicmanager.totalresults} of Total {topicmanager.collectioncountarticle}
+
+                                                <Col md="5">
+                                                    <FormGroup className="mt-2">
+
+                                                        <Input type="date" onChange={(e) => topicmanager.setTopicdate(e.target.value)} />
+
+
+                                                    </FormGroup>
+
                                                 </Col>
+                                                <Col md="5">
+                                                    <FormGroup className="mt-2">
+                                                        <Input type="date" onChange={(e) => topicmanager.setTopicdateend(e.target.value)} />
+                                                    </FormGroup>
+                                                </Col>
+                                                <Col md="2">
+                                                    <Button className="mt-2" color="default" style={{ borderRadius: '2px' }}
+                                                        size="md" type="button"
+                                                        id="lunchbox_Articles"
+                                                        onClick={topicmanager.exportarticles}
+
+                                                    >
+                                                        Export
+                                                    </Button>
+                                                    {/* Fetched Results: {topicmanager.totalresults} of Total {topicmanager.collectioncountarticle} */}
+                                                </Col>
+
                                             </Row>
+
 
 
                                             <Articlevideotable articlemodel={topicmanager.articlemodel} togglemodel={topicmanager.togglemodel} />
                                             <Row>
+
                                                 <Col md="6">
+
                                                     total Pages: {Math.ceil(topicmanager.totalresults / 50)}
 
                                                 </Col>
@@ -470,83 +552,125 @@ function Topicsforms(props) {
 
 
                                                 </Col>
-                                                <Col md="12">
-                                                    <FormGroup>
-                                                        <Button outline color="primary" size="sm" onClick={topicmanager.getallarticles} >Refresh</Button>
-                                                        <Button outline color="warning" size="sm" onClick={topicmanager.bulkdeleter} >Delete</Button>
-                                                        <Button outline color="info" size="sm" id="Articles" onClick={topicmanager.reviewupdate} >Change Review</Button>
-                                                        <Button outline color="success" size="sm" id="Articles" onClick={topicmanager.statusupdate} >Change Status</Button>
+                                                <Row>
+                                                    <Col md="12" sm="12">
+                                                        <FormGroup>
+                                                            <Button outline style={{ borderRadius: '2px' }} color="primary" size="sm" onClick={topicmanager.getallarticles} >Refresh List</Button>
+                                                            <Button outline style={{ borderRadius: '2px' }} color="primary" size="sm" onClick={topicmanager.bulkdeleter} >Delete List</Button>
+                                                            <Button outline style={{ borderRadius: '2px' }} color="primary" size="sm" id="Articles" onClick={topicmanager.reviewupdate} >Change Review</Button>
+                                                            <Button outline style={{ borderRadius: '2px' }} color="primary" size="sm" id="Articles" onClick={topicmanager.statusupdate} >Change Status</Button>
+                                                        </FormGroup>
+                                                    </Col>
 
-                                                    </FormGroup>
-                                                    <Form inline>
+                                                </Row>
+                                                <Row>
+                                                    <Col md='12'>
+                                                        <Form inline>
+
+                                                            <FormGroup className="m-1">
+
+                                                                <Label for="isactive" className="mr-2">state: {topicmanager.articlevideoisactive}</Label>
+                                                                <Input style={{ borderRadius: '2px' }} bsSize="sm" type="select" name="isactive" id="isactive"
+                                                                    onChange={topicmanager.statetoggle}
+                                                                    value={topicmanager.articlevideoisactive}
+                                                                    className="form-control-alternative"
+                                                                >
+                                                                    <option value="">Select Option</option>
+                                                                    <option value={true}>Active</option>
+                                                                    <option value={false}>Deactivated</option>
 
 
-                                                        <FormGroup className="m-1">
 
-                                                            <Label for="isactive">state: {topicmanager.articlevideoisactive}</Label>
-                                                            <Input bsSize="sm" value={topicmanager.articlevideoisactive} type="select" name="isactive" id="isactive"
-                                                                onChange={topicmanager.statetoggle}
-                                                            >
-                                                                <option value="">Select Option</option>
-                                                                <option value={true}>Active</option>
-                                                                <option value={false}>Deactivated</option>
+                                                                </Input>
+
+                                                            </FormGroup>
+                                                            <FormGroup className="m-1">
+
+                                                                <Label for="isreview" className="mr-2"> Review: </Label>
+                                                                <Input style={{ borderRadius: '2px' }} bsSize="sm" type="select" name="isreview" id="isreview"
+                                                                    value={topicmanager.articlevideoisview}
+                                                                    onChange={topicmanager.viewtoggle}
+                                                                    className="form-control-alternative"
+                                                                >
+                                                                    <option value="">Select Option</option>
+                                                                    <option value={true}>Marked as Reviewed</option>
+                                                                    <option value={false}>Not Reviewed</option>
 
 
 
-                                                            </Input>
+                                                                </Input>
+
+                                                            </FormGroup>
+                                                            <FormGroup className="m-1">
+                                                                <Label for="channelid" className="mr-2">website: </Label>
+                                                                <Input style={{ borderRadius: '2px' }} bsSize="sm" className="form-control-alternative"
+                                                                    onChange={topicmanager.sitequery}
+                                                                    placeholder="Enter website term"
+                                                                    id="channelid" name="channelid" />
+                                                            </FormGroup>
+                                                            <FormGroup className="m-1">
+                                                                <Label for="authorquery" className="mr-2">author: </Label>
+                                                                <Input style={{ borderRadius: '2px' }} className="form-control-alternative" bsSize="sm" onChange={topicmanager.authorquery} placeholder="Enter authorquery" id="authorquery" name="authorquery" />
+                                                            </FormGroup>
+                                                            <FormGroup className="m-1">
+                                                                <Label for="q" className="mr-2">search query: </Label>
+                                                                <Input style={{ borderRadius: '2px' }} className="form-control-alternative" bsSize="sm" value={topicmanager.articlevideosearch} onChange={topicmanager.searchquery} placeholder="Enter Query" id="q" name="q" />
+                                                            </FormGroup>
+                                                            <FormGroup className="m-1">
+                                                                <Label for="perpage" className="mr-2">Per page: </Label>
+
+                                                                <Input
+                                                                    style={{ borderRadius: '2px' }}
+                                                                    className="form-control-alternative"
+                                                                    value={topicmanager.articlevideoperpage}
+                                                                    type="select" bsSize="sm"
+                                                                    onChange={(e) => topicmanager.setArticlevideoperpage(e.target.value)}
+                                                                    placeholder="Perpage" id="perpage" name="perpage">
+                                                                    <option value="">Select Option</option>
+                                                                    <option value={50}>50</option>
+                                                                    <option value={100}>100</option>
+                                                                    <option value={150}>150</option>
+                                                                    <option value={200}>200</option>
+                                                                    <option value={250}>250</option>
+                                                                    <option value={300}>300</option>
+
+
+
+
+                                                                </Input>
+                                                            </FormGroup>
+
+                                                        </Form>
+
+                                                    </Col>
+
+                                                    <Col md="5">
+                                                        <FormGroup className="mt-2">
+
+                                                            <Input type="date" onChange={(e) => topicmanager.setTopicdate(e.target.value)} />
+
 
                                                         </FormGroup>
-                                                        <FormGroup className="m-1">
 
-                                                            <Label for="isreview"> Review: </Label>
-                                                            <Input bsSize="sm" type="select" name="isreview" id="isreview"
-                                                                onChange={topicmanager.viewtoggle}
-                                                                value={topicmanager.articlevideoisview}
-                                                            >
-                                                                <option value="">Select Option</option>
-                                                                <option value={true}>Marked as Reviewed</option>
-                                                                <option value={false}>Not Reviewed</option>
-
-
-
-                                                            </Input>
-
+                                                    </Col>
+                                                    <Col md="5">
+                                                        <FormGroup className="mt-2">
+                                                            <Input type="date" onChange={(e) => topicmanager.setTopicdateend(e.target.value)} />
                                                         </FormGroup>
-                                                        <FormGroup className="m-1">
-                                                            <Label for="channelid">website: </Label>
-                                                            <Input bsSize="sm" onChange={topicmanager.sitequery} placeholder="Enter website term" id="channelid" name="channelid" />
-                                                        </FormGroup>
-                                                        <FormGroup className="m-1">
-                                                            <Label for="authorquery">author: </Label>
-                                                            <Input bsSize="sm" onChange={topicmanager.authorquery} placeholder="Enter authorquery" id="authorquery" name="authorquery" />
-                                                        </FormGroup>
-                                                        <FormGroup className="m-1">
-                                                            <Label for="q">search query: </Label>
-                                                            <Input bsSize="sm" value={topicmanager.articlevideosearch} onChange={topicmanager.searchquery} placeholder="Enter Query" id="q" name="q" />
-                                                        </FormGroup>
-                                                        <FormGroup className="m-1">
-                                                            <Label for="perpage">Per page: </Label>
-                                                            <Input
-                                                                value={topicmanager.articlevideoperpage}
-                                                                type="select" bsSize="sm"
-                                                                onChange={(e) => topicmanager.setArticlevideoperpage(e.target.value)}
-                                                                placeholder="Perpage" id="perpage" name="perpage">
-                                                                <option value="">Select Option</option>
-                                                                <option value={50}>50</option>
-                                                                <option value={100}>100</option>
-                                                                <option value={150}>150</option>
-                                                                <option value={200}>200</option>
-                                                                <option value={250}>250</option>
-                                                                <option value={300}>300</option>
+                                                    </Col>
+                                                    <Col md="2">
+                                                        <Button className="mt-2" color="default" style={{ borderRadius: '2px' }}
+                                                            size="md" type="button"
+                                                            id="lunchbox_Articles"
+                                                            onClick={topicmanager.exportarticles}
 
+                                                        >
+                                                            Export
+                                                    </Button>
+                                                        {/* Fetched Results: {topicmanager.totalresults} of Total {topicmanager.collectioncountarticle} */}
+                                                    </Col>
 
-
-
-                                                            </Input>
-                                                        </FormGroup>
-                                                    </Form>
-
-                                                </Col>
+                                                </Row>
                                             </Row>
                                         </TabPane>
                                         <TabPane tabId="tabs4">
@@ -626,8 +750,30 @@ function Topicsforms(props) {
                                                     </Form>
 
                                                 </Col>
-                                                <Col md="4">
-                                                    Fetched Results: {topicmanager.paginationcount} of Total {topicmanager.collectioncountarticle}
+                                                <Col md="5">
+                                                    <FormGroup className="mt-2">
+
+                                                        <Input type="date" onChange={(e) => topicmanager.setTopicdate(e.target.value)} />
+
+
+                                                    </FormGroup>
+
+                                                </Col>
+                                                <Col md="5">
+                                                    <FormGroup className="mt-2">
+                                                        <Input type="date" onChange={(e) => topicmanager.setTopicdateend(e.target.value)} />
+                                                    </FormGroup>
+                                                </Col>
+                                                <Col md="2">
+                                                    <Button className="mt-2" color="default" style={{ borderRadius: '2px' }}
+                                                        size="md" type="button"
+                                                        id="lunchbox_Videos"
+                                                        onClick={topicmanager.exportarticles}
+
+                                                    >
+                                                        Export
+                                                    </Button>
+                                                    {/* Fetched Results: {topicmanager.totalresults} of Total {topicmanager.collectioncountarticle} */}
                                                 </Col>
                                             </Row>
 
@@ -729,6 +875,32 @@ function Topicsforms(props) {
                                                         </FormGroup>
                                                     </Form>
 
+
+                                                </Col>
+                                                <Col md="5">
+                                                    <FormGroup className="mt-2">
+
+                                                        <Input type="date" onChange={(e) => topicmanager.setTopicdate(e.target.value)} />
+
+
+                                                    </FormGroup>
+
+                                                </Col>
+                                                <Col md="5">
+                                                    <FormGroup className="mt-2">
+                                                        <Input type="date" onChange={(e) => topicmanager.setTopicdateend(e.target.value)} />
+                                                    </FormGroup>
+                                                </Col>
+                                                <Col md="2">
+                                                    <Button className="mt-2" color="default" style={{ borderRadius: '2px' }}
+                                                        size="md" type="button"
+                                                        id="lunchbox_Videos"
+                                                        onClick={topicmanager.exportarticles}
+
+                                                    >
+                                                        Export
+                                                    </Button>
+                                                    {/* Fetched Results: {topicmanager.totalresults} of Total {topicmanager.collectioncountarticle} */}
                                                 </Col>
                                             </Row>
                                         </TabPane>
@@ -817,8 +989,30 @@ function Topicsforms(props) {
                                                     </Form>
 
                                                 </Col>
-                                                <Col md="4">
-                                                    Fetched Results: {topicmanager.paginationcount} of Total {topicmanager.collectioncounttools}
+                                                <Col md="5">
+                                                    <FormGroup className="mt-2">
+
+                                                        <Input type="date" onChange={(e) => topicmanager.setTopicdate(e.target.value)} />
+
+
+                                                    </FormGroup>
+
+                                                </Col>
+                                                <Col md="5">
+                                                    <FormGroup className="mt-2">
+                                                        <Input type="date" onChange={(e) => topicmanager.setTopicdateend(e.target.value)} />
+                                                    </FormGroup>
+                                                </Col>
+                                                <Col md="2">
+                                                    <Button className="mt-2" color="default" style={{ borderRadius: '2px' }}
+                                                        size="md" type="button"
+                                                        onClick={topicmanager.exportarticles}
+                                                        id="lunchbox_Tools"
+
+                                                    >
+                                                        Export
+                                                    </Button>
+                                                    {/* Fetched Results: {topicmanager.totalresults} of Total {topicmanager.collectioncountarticle} */}
                                                 </Col>
                                             </Row>
 
@@ -927,6 +1121,31 @@ function Topicsforms(props) {
                                                         </FormGroup>
                                                     </Form>
 
+                                                </Col>
+                                                <Col md="5">
+                                                    <FormGroup className="mt-2">
+
+                                                        <Input type="date" onChange={(e) => topicmanager.setTopicdate(e.target.value)} />
+
+
+                                                    </FormGroup>
+
+                                                </Col>
+                                                <Col md="5">
+                                                    <FormGroup className="mt-2">
+                                                        <Input type="date" onChange={(e) => topicmanager.setTopicdateend(e.target.value)} />
+                                                    </FormGroup>
+                                                </Col>
+                                                <Col md="2">
+                                                    <Button className="mt-2" color="default" style={{ borderRadius: '2px' }}
+                                                        size="md" type="button"
+                                                        id="lunchbox_Tools"
+                                                        onClick={topicmanager.exportarticles}
+
+                                                    >
+                                                        Export
+                                                    </Button>
+                                                    {/* Fetched Results: {topicmanager.totalresults} of Total {topicmanager.collectioncountarticle} */}
                                                 </Col>
                                             </Row>
                                         </TabPane>

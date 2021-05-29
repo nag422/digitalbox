@@ -42,26 +42,27 @@ const Userslist = (props) => {
   const paginate = async (e) => {   
     
     const url="https://app.kiranvoleti.com/ui/getuserlist/";
-    const body = JSON.stringify({
+    const stringdata = {
       'page':e,
-    })
-   
+    }
+    
     setCurrentpage(e)
     const config = {
       headers: {
-          'Content-Type': 'application/json',
-          'Accept':'application/json',
+          'content-type': 'application/json',          
           'X-CSRFToken': getCookie('csrftoken')
       }
     }
-    await axios.get(url, body, config)
+    await axios.get(url, {params:stringdata}, config)
     .then(res=>{            
         setUsers(res.data.users); 
-        setIsalert(false)                       
+        console.log(res.data)
+        setIsalert(false)         
+              
         
     })
     .catch(err=>{
-        console.log(err)
+        // console.log(err.message)
         setIsalert(false)
     })
     
