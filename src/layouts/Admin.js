@@ -51,7 +51,7 @@ class Admin extends React.Component {
             }
             else{
                 localStorage.setItem('userrole', 'user');  
-                // window.location.assign("/login")
+                window.location.assign("/login")
                 
 
             }

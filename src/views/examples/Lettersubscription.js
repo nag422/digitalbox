@@ -608,21 +608,21 @@ const Lettersubscription = () => {
                             <FormGroup className="mb-3">
                                 <Label for="articletext">Articletext</Label>
                                 <Input type="textarea" name="articletext" id="articletext"
-                                    onChange={(e) => setTitle(e.target.value)}
+                                    onChange={(e) => setArticletext(e.target.value)}
                                 />
 
                             </FormGroup>
                             <FormGroup className="mb-3">
                                 <Label for="videotext">Videotext</Label>
                                 <Input type="textarea" name="videotext" id="videotext"
-                                    onChange={(e) => setTitle(e.target.value)}
+                                    onChange={(e) => setVideotext(e.target.value)}
                                 />
 
                             </FormGroup>
                             <FormGroup className="mb-3">
                                 <Label for="tooltext">Toolstext</Label>
                                 <Input type="textarea" name="tooltext" id="tooltext"
-                                    onChange={(e) => setTitle(e.target.value)}
+                                    onChange={(e) => setTooltext(e.target.value)}
                                 />
 
                             </FormGroup>
